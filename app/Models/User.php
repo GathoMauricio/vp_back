@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'rol_id',
+        'role_id',
         'client_id',
         'name',
         'email',
@@ -25,6 +25,26 @@ class User extends Authenticatable
         'telefono',
         'area',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(
+            'App\Models\Role',
+            'role_id',
+            'id'
+        )
+            ->withDefault();
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(
+            'App\Models\Client',
+            'client_id',
+            'id'
+        )
+            ->withDefault();
+    }
 
     /**
      * The attributes that should be hidden for arrays.

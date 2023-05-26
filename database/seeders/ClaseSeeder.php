@@ -55,19 +55,19 @@ class ClaseSeeder extends Seeder
         ]);
 
         Clase::create([
-            'tipo' => 'C1',
+            'tipo' => 'A1',
             'tiempo_de' => '02:46:00',
             'tiempo_hasta' => '03:00:00',
             'precio' => '590',
         ]);
         Clase::create([
-            'tipo' => 'C2',
+            'tipo' => 'A2',
             'tiempo_de' => '03:01:00',
             'tiempo_hasta' => '04:00:00',
             'precio' => '750',
         ]);
         Clase::create([
-            'tipo' => 'C3',
+            'tipo' => 'A3',
             'tiempo_de' => '04:01:00',
             'tiempo_hasta' => null,
             'precio' => null,

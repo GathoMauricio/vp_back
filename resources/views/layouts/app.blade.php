@@ -6,24 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <title>{{ env('APP_NAME') }} | System</title>
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    {{--  <link rel="stylesheet" href="{{ asset('css/font.css') }}">  --}}
-    <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
-    <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/font.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{--  <link href="{{ asset('css/alertify.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/semantic.css') }}" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>  --}}
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed layout-fixed sidebar-collapse ">
@@ -37,42 +32,40 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                             class="fas fa-bars"></i></a>
                 </li>
-
-
                 <!--
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-      -->
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+                -->
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <!--
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
-      -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                    <form class="form-inline">
+                        <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                            <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        </div>
+                    </form>
+                    </div>
+                </li>
+                -->
                 <!-- Messages Dropdown Menu
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -163,6 +156,12 @@
       </li>
       -->
                 <li class="nav-item">
+                    <a class="nav-link btn btn-info font-weight-bold" href="{{ route('create/ticket') }}"
+                        role="button">
+                        INICIAR TICKET
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
@@ -199,10 +198,9 @@
                         <img src="{{ Avatar::create(Auth::user()->email)->toGravatar(['d' => 'identicon', 'r' => 'pg', 's' => 100]) }}"
                             class="img-circle elevation-3" alt="User Image" width="80" height="80" />
                     </div>
-                    {{--  <div class="info">
-                        <a href="#"
-                            class="d-block">{{ Auth::user()->name . ' ' . Auth::user()->middle_name }}</a>
-                    </div>  --}}
+                    <div class="info">
+                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                    </div>
                 </div>
 
                 <!-- SidebarSearch Form -->
@@ -344,42 +342,18 @@
             reserved.
         </footer>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
-
-    {{--  <script src="{{ asset('js/alertify.js') }}" type="text/javascript"></script>  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-    {{--  <script src="{{ asset('js/jquery-ui.min.js') }}" defer></script>
-    <script src="{{ asset('datepicker/jquery.datetimepicker.full.min.js') }}" defer></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('datepicker/jquery.datetimepicker.min.css') }}" />
-    <script src="//unpkg.com/vanilla-masker@1.1.1/lib/vanilla-masker.js"></script>
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>  --}}
-
-
-    {{--  <!-- Select2 -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        document.addEventListener('livewire:load', function() {
-            $('.select2').select2();
-        });
-    </script>
-    <input type="hidden" id="txt_user_id" value="{{ Auth::user()->id }}" />
-    <input type="hidden" id="txt_rol_user_id" value="{{ Auth::user()->rol_user_id }}" />  --}}
-    {{--  <style>
-        .comment-box-modal {
-            background: url({{ asset('img/background_black_red.jpg') }});
-            width: 100%;
-            height: 400px;
-            overflow: hidden;
-            overflow-y: scroll;
-        }
-    </style>  --}}
 </body>
 
 </html>
