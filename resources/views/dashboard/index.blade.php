@@ -121,15 +121,14 @@
                         {{ $ticket->pagado }}
                     </td>
                     <td class="font-weight-bold">
-                        <button class="btn btn-primary" data-toggle="tooltip" title="Ticket de servicio...">
-                            <span class="icon icon-ticket"></span>
-                        </button>
-                        <button class="btn btn-info" data-toggle="tooltip" title="Órden de servicio..">
-                            <span class="icon icon-file-pdf"></span>
-                        </button>
-                        <button class="btn btn-warning" data-toggle="tooltip" title="Editar registro...">
+                        <a href="{{ route('show/ticket', $ticket->folio) }}" class="btn btn-primary" data-toggle="tooltip"
+                            title="Ver órden de servicio...">
+                            <span class="icon icon-eye"></span>
+                        </a>
+                        <a href="{{ route('edit/ticket', $ticket->folio) }}" class="btn btn-warning" data-toggle="tooltip"
+                            title="Editar registro...">
                             <span class="icon icon-pencil"></span>
-                        </button>
+                        </a>
                         <button class="btn btn-danger" data-toggle="tooltip" title="Eliminar registro...">
                             <span class="icon icon-bin"></span>
                         </button>

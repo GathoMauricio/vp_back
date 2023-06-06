@@ -42,12 +42,16 @@ class CreateTicketsTable extends Migration
             $table->string('office_caducidad_equipo')->nullable();
             $table->string('antivirus_caducidad_equipo')->nullable();
             $table->string('software_equipo')->nullable();
-            $table->integer('calificacion')->nullable();
+            $table->string('danio')->nullable();
+            $table->string('advertencia')->nullable();
+            $table->string('solucion')->nullable();
+            $table->string('calificacion')->nullable();
             $table->string('firma_usuario_final')->nullable();
             $table->string('firma_encargado')->nullable();
             $table->string('firma_ing_servicio')->nullable();
             $table->string('pagado')->nullable();
             $table->string('motivo_cancelacion')->nullable();
+            $table->string('cotizar_producto')->nullable();
             $table->timestamps();
         });
     }

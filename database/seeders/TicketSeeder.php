@@ -25,7 +25,7 @@ class TicketSeeder extends Seeder
             'folio' => 'T-000001',
             'inicio' => null,
             'cierre' => null,
-            'prioridad' => 'Normal',
+            'prioridad' => 'Media',
             'problematica' => 'El perro del vecino se mirió y ahora no imprime a color si no enciendo primero la estufa',
             'comentarios_usuario' => 'El perro era pastor alemán',
             'comentarios_cliente' => 'La empresa no se hace responsable por lo acontecido',
@@ -44,12 +44,16 @@ class TicketSeeder extends Seeder
             'office_caducidad_equipo' => null,
             'antivirus_caducidad_equipo' => null,
             'software_equipo' => null,
+            'danio' => null,
+            'advertencia' => null,
+            'solucion' => null,
             'calificacion' => null,
             'firma_usuario_final' => null,
             'firma_encargado' => null,
             'firma_ing_servicio' => null,
             'pagado' => 'N|A',
             'motivo_cancelacion' => null,
+            'cotizar_producto' => 'NO',
         ]);
     }
 }

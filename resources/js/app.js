@@ -1,13 +1,22 @@
 require("./bootstrap");
+
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
+
+    $(".select2").select2({ theme: "classic" });
+
     if ($("#dashboard_table").length) {
         crearDatatable("dashboard_table");
     }
 });
 
-function crearDatatable(id) {
-    $("#" + id).DataTable({
+window.successNotification = (text) => alertify.success(text);
+window.infoNotification = (text) => alertify.message(text);
+window.warningNotification = (text) => alertify.warning(text);
+window.errorNotification = (text) => alertify.error(text);
+
+function crearDatatable(table_id) {
+    $("#" + table_id).DataTable({
         language: {
             lengthMenu: "Mostrar _MENU_ registros",
             zeroRecords: "No se encontraron resultados",
@@ -48,3 +57,106 @@ function crearDatatable(id) {
         ],
     });
 }
+
+window.loadUsersByClient = (client_id) => {
+    if (client_id.length > 0) {
+        $.ajax("/api/load_users_by_client/" + client_id)
+            .done(function (data) {
+                let html = "<option value>Seleccione una opción</option>";
+                let counter = 0;
+                $.each(JSON.parse(data), function (index, item) {
+                    counter++;
+                    html +=
+                        "<option value='" +
+                        item.id +
+                        "'>" +
+                        item.name +
+                        "</option>";
+                });
+                $("#usuario_id").html(html);
+                if (counter > 0) {
+                    infoNotification("Los usuarios se cargaron correctamente.");
+                } else {
+                    warningNotification(
+                        "No se han registrado usuarios a este cliente, por favor verifíquelo y vuelva a intentarlo."
+                    );
+                    $("#area").val("");
+                    $("#telefono").val("");
+                    $("#email").val("");
+                    $("#direccion").val("");
+                }
+            })
+            .fail(function (err) {
+                console.log("error: " + JSON.stringify(err));
+            });
+    } else {
+        $("#usuario_id").html("<option value>Seleccione un cliente</option>");
+        $("#area").val("");
+        $("#telefono").val("");
+        $("#email").val("");
+        $("#direccion").val("");
+    }
+};
+
+window.loadUserData = (user_id) => {
+    if (user_id.length > 0) {
+        $.ajax("/api/load_user_data/" + user_id)
+            .done(function (data) {
+                const json = JSON.parse(data);
+                $("#area").val(json.area);
+                $("#telefono").val(json.telefono);
+                $("#email").val(json.email);
+                $("#direccion").val(json.direccion);
+            })
+            .fail(function (err) {
+                console.log("error: " + JSON.stringify(err));
+            });
+    } else {
+        $("#area").val("");
+        $("#telefono").val("");
+        $("#email").val("");
+        $("#direccion").val("");
+    }
+};
+
+window.loadUsersByClientOnEdit = (client_id, current_id) => {
+    $.ajax("/api/load_users_by_client/" + client_id)
+        .done(function (data) {
+            let html = "<option value>Seleccione una opción</option>";
+            let counter = 0;
+            $.each(JSON.parse(data), function (index, item) {
+                counter++;
+                if (item.id == current_id)
+                    html +=
+                        "<option value='" +
+                        item.id +
+                        "' selected>" +
+                        item.name +
+                        "</option>";
+                else
+                    html +=
+                        "<option value='" +
+                        item.id +
+                        "'>" +
+                        item.name +
+                        "</option>";
+            });
+            $("#usuario_id").html(html);
+        })
+        .fail(function (err) {
+            console.log("error: " + JSON.stringify(err));
+        })
+        .always(function () {
+            $.ajax("/api/load_user_data/" + current_id)
+                .done(function (data) {
+                    const json = JSON.parse(data);
+                    $("#area").val(json.area);
+                    $("#telefono").val(json.telefono);
+                    $("#email").val(json.email);
+                    $("#direccion").val(json.direccion);
+                })
+                .fail(function (err) {
+                    console.log("error: " + JSON.stringify(err));
+                });
+        });
+};

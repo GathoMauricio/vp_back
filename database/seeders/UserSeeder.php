@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'Oscar Mauricio',
             'email' => 'mauricio2769@gmail.com',
             'telefono' => '5633943566',
+            'direccion' => 'retertjert ertjlekt jlekjrt ertlk jert',
             'password' => bcrypt('Hannibal2769'),
         ]);
         User::create([
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'Fulana Mesa',
             'email' => 'mesa@mail.com',
             'telefono' => '435345345',
+            'direccion' => 'ghfghfghfght jlekjrt fghfghjert',
             'password' => bcrypt('Mesa2769'),
         ]);
         User::create([
@@ -35,6 +37,7 @@ class UserSeeder extends Seeder
             'name' => 'Perengano tecnico',
             'email' => 'tecnico@mail.com',
             'telefono' => '3452323434',
+            'direccion' => 'wewerjert ertretertjrt eertertertjert',
             'password' => bcrypt('Tecnico2769'),
         ]);
         User::create([
@@ -43,7 +46,8 @@ class UserSeeder extends Seeder
             'area' => 'Recursos Humanos', //Puede tener un área
             'name' => 'Juan Mecánico cliente',
             'email' => 'cliente@mail.com',
-            'telefono' => 'ewrwerwerewr',
+            'telefono' => '4646456458',
+            'direccion' => 'fgdfgdfgrt ertjldfgdfgdfgdf ertlk jert',
             'password' => bcrypt('Cliente2769'),
         ]);
     }

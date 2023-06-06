@@ -42,12 +42,16 @@ class Ticket extends Model
         'office_caducidad_equipo',
         'antivirus_caducidad_equipo',
         'software_equipo',
+        'danio',
+        'advertencia',
+        'solucion',
         'calificacion',
         'firma_usuario_final',
         'firma_encargado',
         'firma_ing_servicio',
         'pagado',
         'motivo_cancelacion',
+        'cotizar_producto'
     ];
     protected static function boot()
     {

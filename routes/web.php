@@ -11,4 +11,8 @@ Route::view('/', 'auth.login')->name('/')->middleware('guest');
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('create/ticket', [TicketController::class, 'create'])->name('create/ticket');
+    Route::post('store/ticket', [TicketController::class, 'store'])->name('store/ticket');
+    Route::get('show/ticket/{folio}', [TicketController::class, 'show'])->name('show/ticket');
+    Route::get('edit/ticket/{folio}', [TicketController::class, 'edit'])->name('edit/ticket');
+    Route::put('update/ticket/{folio}', [TicketController::class, 'update'])->name('update/ticket');
 });
