@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\TicketServiceType;
+use App\Models\ServiceType;
 use App\Models\Service;
 use App\Models\Ticket;
 use App\Models\Client;
@@ -24,17 +26,18 @@ class TicketController extends Controller
         $clases = Clase::orderBy('tipo', 'DESC')->get();
         $coordinadores = User::where('role_id', 3)->orderBy('name')->get();
         $servicios = Service::orderBy('clase', 'DESC')->get();
-        return view('ticket.create', compact('clients', 'clases', 'coordinadores', 'servicios'));
+        $tipos_servicios = ServiceType::all();
+        return view('ticket.create', compact('clients', 'clases', 'coordinadores', 'servicios', 'tipos_servicios'));
     }
 
-    public function store(TicketRequest $request)
+    public function store(Request $request)
     {
         $ticket = Ticket::create([
             'usuario_id' => $request->usuario_id,
             'author_id' => \Auth::user()->id,
             'coordinador_id' => $request->coordinador_id,
             'status_id' => 1,
-            'clase_id' => $request->clase_id,
+            //'clase_id' => $request->clase_id,
             'folio' => $this->generaFolio(),
             'inicio' => null,
             'cierre' => null,
@@ -67,6 +70,15 @@ class TicketController extends Controller
             'pagado' => 'N|A',
             'motivo_cancelacion' => null,
         ]);
+        if ($request->tipo) {
+            for ($i = 0; count($request->tipo) > $i; $i++) {
+                TicketServiceType::create([
+                    'ticket_id' => $ticket->id,
+                    'tipo' => $request->tipo[$i],
+                    'detalle' => $request->detalle[$i]
+                ]);
+            }
+        }
         \Session::flash('success', 'El ticket con el folio ' . $ticket->folio . ' ha sido almacenado correctamente.');
         return redirect()->route('show/ticket', $ticket->folio);
     }

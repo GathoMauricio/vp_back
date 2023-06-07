@@ -78,7 +78,40 @@
                 </h5>
                 <hr style="height:2px; width:100%; border-width:0; color:#60b22f; background-color:#60b22f">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cbo_tipo_servicio" class="vp-label-form">TIPO DE SERVICIO</label>
+                            <select id="cbo_tipo_servicio" name="cbo_tipo_servicio" class="form-select">
+                                @foreach ($tipos_servicios as $tipos_servicio)
+                                    <option value="{{ $tipos_servicio->abrev }}">{{ $tipos_servicio->tipo }}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                            <input id="detalle_tipo_servicio" type="text" class="form-control" placeholder="Detalles...">
+                            <br>
+                            <button onclick="addServiceType();" type="button"
+                                class="btn btn-primary btn-block">Agregar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Detalles</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_service_types">
+                                <tr>
+                                    <td class="text-center" colspan="3">No se han agregado tipos de servicio</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="prioridad" class="vp-label-form">PRIORIDAD*</label>
                             <select value="{{ old('prioridad') }}" name="prioridad" id="prioridad" class="form-select">
@@ -95,7 +128,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    {{--  <div class="col-md-4">
                         <div class="form-group">
                             <label for="clase_id" class="vp-label-form">CLASE*</label>
                             <select value="{{ old('clase_id') }}" name="clase_id" id="clase_id" class="form-select">
@@ -111,8 +144,8 @@
                                 </small>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-md-4">
+                    </div>  --}}
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="coordinador_id" class="vp-label-form">COORDINADOR DEL PROYECTO</label>
                             <select value="{{ old('coordinador_id') }}" name="coordinador_id" id="coordinador_id"

@@ -4,7 +4,17 @@
     @include('layouts.vp_header')
     <div class="container">
         <div class="row justify-content-center">
-            <h4>EDITAR TICKET FOLIO [{{ $ticket->folio }}]</h4>
+            <h4>
+                EDITAR TICKET FOLIO [{{ $ticket->folio }}]
+                <span class="float-right">
+                    Estatus: <b>{{ $ticket->status->nombre }}</b>
+                    <br>
+                    <small>
+                        {{--  switch para dar seguimiento al proseso de estatus  --}}
+                        <a href="javascript:void(0)">Marcar como aprobado</a>
+                    </small>
+                </span>
+            </h4>
             <form action="{{ route('update/ticket', $ticket->folio) }}" class="container" method="POST">
                 @csrf
                 @method('PUT')
@@ -522,6 +532,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="button" class="btn btn-danger float-left" value="CANCELAR">
                 <input type="submit" class="btn btn-primary float-right" value="ACTUALIZAR">
                 <br><br>
             </form>

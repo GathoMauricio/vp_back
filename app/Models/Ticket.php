@@ -107,4 +107,9 @@ class Ticket extends Model
         )
             ->withDefault();
     }
+
+    public function tipos_servicios()
+    {
+        return $this->hasMany('App\Models\TicketServiceType', 'ticket_id');
+    }
 }

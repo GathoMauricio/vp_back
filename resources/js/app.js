@@ -2,9 +2,7 @@ require("./bootstrap");
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
-
     $(".select2").select2({ theme: "classic" });
-
     if ($("#dashboard_table").length) {
         crearDatatable("dashboard_table");
     }
@@ -159,4 +157,36 @@ window.loadUsersByClientOnEdit = (client_id, current_id) => {
                     console.log("error: " + JSON.stringify(err));
                 });
         });
+};
+
+let countServiceType = 0;
+window.addServiceType = () => {
+    let tipo = $("#cbo_tipo_servicio").val();
+    let detalle = $("#detalle_tipo_servicio").val();
+    if (countServiceType <= 0) $("#tbody_service_types").html("");
+    $("#tbody_service_types").append(`
+        <tr id="tr_service_type_${countServiceType}">
+            <td>
+                <input value="${tipo}" type="text" name="tipo[]" class="form-control" readonly />
+            </td>
+            <td>
+                <input value="${detalle}"  type="text" name="detalle[]" class="form-control" readonly />
+            </td>
+            <td>
+                <button onclick="removeServiceType(${countServiceType})" type="button" class="btn btn-danger"><span class="icon icon-minus"></span></button>
+            </td>
+        </tr>`);
+    countServiceType++;
+    $("#detalle_tipo_servicio").val("");
+};
+
+window.removeServiceType = (service_type_id) => {
+    countServiceType--;
+    $("#tr_service_type_" + service_type_id).remove();
+    if (countServiceType <= 0)
+        $("#tbody_service_types").html(
+            `<tr>
+            <td class="text-center" colspan="3">No se han agregado tipos de servicio</td>
+        </tr>`
+        );
 };
