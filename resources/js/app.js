@@ -221,3 +221,31 @@ window.deleteUser = (user_id) => {
         function () {}
     );
 };
+
+window.deleteClient = (client_id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            $.ajax({
+                url: "/delete/client",
+                method: "POST",
+                data: {
+                    client_id: client_id,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    _method: "DELETE",
+                },
+            })
+                .done(function (data) {
+                    console.log(data);
+                    alert("Cliente eliminado.");
+                    window.location.reload();
+                })
+                .fail(function (err) {
+                    console.log("error: " + JSON.stringify(err));
+                    errorNotification("Error al eliminar el cliente.");
+                });
+        },
+        function () {}
+    );
+};

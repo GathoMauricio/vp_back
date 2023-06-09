@@ -226,13 +226,26 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('/') }}"
-                                class="nav-link @if (Route::currentRouteName() == '/') active @endif">
+                            <a href="{{ route('dashboard') }}"
+                                class="nav-link @if (Route::currentRouteName() == 'dashboard') active @endif">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{ route('index/user') }}"
+                                class="nav-link @if (Route::currentRouteName() == 'index/user') active @endif">
+                                <i class="nav-icon icon icon-users"></i>
+                                <p>Control de usuarios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('index/client') }}"
+                                class="nav-link @if (Route::currentRouteName() == 'index/client') active @endif">
+                                <i class="nav-icon icon icon-office"></i>
+                                <p>Control de clientes</p>
+                            </a>
+                        </li>
 
                         <!--
             <li class="nav-item menu-close">
@@ -301,9 +314,6 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
-                <a href="{{ route('index/user') }}">
-                    <i class="icon-users"></i> Control de usuarios
-                </a><br /><br />
                 <a href="#"
                     onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
