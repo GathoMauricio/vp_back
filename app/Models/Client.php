@@ -18,5 +18,11 @@ class Client extends Model
         'razon_social',
         'telefono',
         'direccion',
+        'rfc',
     ];
+
+    public function users()
+    {
+        return $this->hasMany('App\Models\User', 'client_id');
+    }
 }

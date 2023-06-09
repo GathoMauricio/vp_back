@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientUserController;
 //Rutas de autenticación
 Auth::routes();
 //Ruta raiz (si el usuario no está autenticado se envia al login de lo contrario se envia al dashboard)
@@ -33,10 +34,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update/client/{id}', [ClientController::class, 'update'])->name('update/client');
     Route::delete('delete/client', [ClientController::class, 'delete'])->name('delete/client');
     //Client users routes
-    Route::get('index/client_users/{id}', [ClientController::class, 'index'])->name('index/client_users');
-    Route::get('create/client_users/{id}', [ClientController::class, 'create'])->name('create/client_users');
-    Route::post('store/client_users/{id}', [ClientController::class, 'store'])->name('store/client_users');
-    Route::get('edit/client_users/{id}', [ClientController::class, 'edit'])->name('edit/client_users');
-    Route::put('update/client_users/{id}', [ClientController::class, 'update'])->name('update/client_users');
-    Route::delete('delete/client_users', [ClientController::class, 'delete'])->name('delete/client_users');
+    Route::get('index/client_user/{id}', [ClientUserController::class, 'index'])->name('index/client_user');
+    Route::get('create/client_user/{id}', [ClientUserController::class, 'create'])->name('create/client_user');
+    Route::post('store/client_user/{id}', [ClientUserController::class, 'store'])->name('store/client_user');
+    Route::get('edit/client_user/{id}', [ClientUserController::class, 'edit'])->name('edit/client_user');
+    Route::put('update/client_user/{id}', [ClientUserController::class, 'update'])->name('update/client_user');
+    Route::delete('delete/client_user', [ClientUserController::class, 'delete'])->name('delete/client_user');
 });

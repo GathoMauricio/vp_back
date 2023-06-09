@@ -3,57 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Client;
 use App\Models\User;
-use App\Models\Role;
 
-class UserController extends Controller
+class ClientUserController extends Controller
 {
-    public function loadUserData(Request $request, $user_id)
+    public function index($id)
     {
-        $user = User::find($user_id);
-        return json_encode($user);
+        $client = Client::find($id);
+        $users = $client->users;
+        return view('client_user.index', compact('client', 'users'));
     }
 
-    public function index()
+    public function create($id)
     {
-        $users = User::where('role_id', '!=', 4)->orderBy('name')->get();
-        return view('user.index', compact('users'));
+        $client = Client::find($id);
+        return view('client_user.create', compact('client'));
     }
 
-    public function create()
-    {
-        $roles = Role::where('id', '<', 4)->get();
-        return view('user.create', compact('roles'));
-    }
-
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $request->validate([
-            'role_id' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required_with:password|same:password|min:6'
+            'area' => 'required',
+            // 'password' => 'required|min:6',
+            // 'password_confirmation' => 'required_with:password|same:password|min:6'
         ], [
-            'role_id.required' => 'Seleccione in rol para e usuario',
             'name.required' => 'Ingrese un nombre al usuario.',
             'email.required' => 'Ingrese un email al usuario.',
             'email.email' => 'Ingrese un email válido.',
-            'password.required' => 'Ingrese una contraseña al usuario.',
-            'password.min' => 'La contraseña debe contener mínimo 6 caracteres.',
+            'area.required' => 'Agregue el área',
+            // 'password.required' => 'Ingrese una contraseña al usuario.',
+            // 'password.min' => 'La contraseña debe contener mínimo 6 caracteres.',
         ]);
 
         $user = User::create([
-            'role_id' => $request->role_id,
+            'role_id' => 4,
+            'client_id' => $id,
             'name' => $request->name,
             'email' => $request->email,
+            'area' => $request->area,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
             'password' => bcrypt($request->password),
         ]);
         if ($user) {
             \Session::flash('success', 'El usuario ' . $user->name . ' ha sido almacenado correctamente.');
-            return redirect()->route('index/user');
+            return redirect()->route('index/client_user', $id);
         } else {
             \Session::flash('error', 'Error al intentar almacenar el registro por favor intente de nuevo.');
             return redirect()->back();
@@ -62,30 +59,34 @@ class UserController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $roles = Role::where('id', '<', 4)->get();
         $user = User::findOrFail($id);
-        return view('user.edit', compact('roles', 'user'));
+        return view('client_user.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'role_id' => 'required',
             'name' => 'required',
+            'area' => 'required',
+            // 'password' => 'required|min:6',
+            // 'password_confirmation' => 'required_with:password|same:password|min:6'
         ], [
-            'role_id.required' => 'Seleccione in rol para e usuario',
             'name.required' => 'Ingrese un nombre al usuario.',
+            'area.required' => 'Agregue el área',
+            // 'password.required' => 'Ingrese una contraseña al usuario.',
+            // 'password.min' => 'La contraseña debe contener mínimo 6 caracteres.',
         ]);
+
         $user = User::findOrFail($id);
 
-        $user->role_id = $request->role_id;
         $user->name = $request->name;
         $user->telefono = $request->telefono;
+        $user->area = $request->area;
         $user->direccion = $request->direccion;
 
         if ($user->save()) {
             \Session::flash('success', 'El usuario ' . $user->name . ' ha sido actualizado correctamente.');
-            return redirect()->route('index/user');
+            return redirect()->route('index/client_user', $user->client_id);
         } else {
             \Session::flash('error', 'Error al intentar actualizar el registro por favor intente de nuevo.');
             return redirect()->back();

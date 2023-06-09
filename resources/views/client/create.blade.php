@@ -9,7 +9,7 @@
             <form action="{{ route('store/client') }}" method="POST" class="container">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="razon_social" class="vp-label-form">Razon social</label>
                             <input type="text" name="razon_social" value="{{ old('razon_social') }}" id="razon_social"
@@ -21,7 +21,19 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="rfc" class="vp-label-form">RFC</label>
+                            <input type="text" name="rfc" value="{{ old('rfc') }}" id="rfc"
+                                class="form-control">
+                            @error('rfc')
+                                <small style="color:red;">
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="telefono" class="vp-label-form">Teléfono</label>
                             <input type="phone" name="telefono" value="{{ old('telefono') }}" id="telefono"

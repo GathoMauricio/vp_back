@@ -34,6 +34,7 @@ class ClientController extends Controller
             'razon_social' => $request->razon_social,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
+            'rfc' => $request->rfc,
         ]);
         if ($client) {
             \Session::flash('success', 'El cliente ' . $client->razon_social . ' ha sido almacenado correctamente.');
@@ -66,6 +67,7 @@ class ClientController extends Controller
         $client->razon_social = $request->razon_social;
         $client->telefono = $request->telefono;
         $client->direccion = $request->direccion;
+        $client->rfc = $request->rfc;
         if ($client->save()) {
             \Session::flash('success', 'El cliente ' . $client->razon_social . ' ha sido actualizado correctamente.');
             return redirect()->route('index/client');

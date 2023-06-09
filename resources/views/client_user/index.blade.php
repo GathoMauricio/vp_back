@@ -5,23 +5,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <h4>
-                Clientes
-                <a href="{{ route('create/client') }}" class="btn btn-primary float-right">Nuevo</a>
+                Usuarios {{ $client->razon_social }}
+                <a href="{{ route('create/client_user', $client->id) }}" class="btn btn-primary float-right">Nuevo</a>
             </h4>
             <table class="table table-stripped" id="user_table">
                 <thead>
                     <tr style="background-color:#60b22f">
                         <th style="color:white;">
-                            RAZÓN SOCIAL
+                            NOMBRE
+                        </th>
+                        <th style="color:white;">
+                            EMAIL
                         </th>
                         <th style="color:white;">
                             TELÉFONO
                         </th>
                         <th style="color:white;">
-                            DIRECCIÓN
-                        </th>
-                        <th style="color:white;">
-                            RFC
+                            ÁREA
                         </th>
                         <th style="color:white;">
 
@@ -29,18 +29,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($clients as $client)
+                    @foreach ($users as $user)
                         <tr>
-                            <td>{{ $client->razon_social }}</td>
-                            <td>{{ $client->telefono }}</td>
-                            <td>{{ $client->direccion }}</td>
-                            <td>{{ $client->rfc }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->telefono }}</td>
+                            <td>{{ $user->area }}</td>
                             <td>
-                                <a href="{{ route('index/client_user', $client->id) }}" class="btn btn-info"><span
-                                        class="icon icon-user-tie"></span></a>
-                                <a href="{{ route('edit/client', $client->id) }}" class="btn btn-warning"><span
+                                <a href="{{ route('edit/client_user', $user->id) }}" class="btn btn-warning"><span
                                         class="icon icon-pencil"></span></a>
-                                <a href="javascript:void(0);" onclick="deleteClient({{ $client->id }});"
+                                <a href="javascript:void(0);" onclick="deleteClientUser({{ $user->id }});"
                                     class="btn btn-danger"><span class="icon icon-bin"></span></a>
                             </td>
                         </tr>
