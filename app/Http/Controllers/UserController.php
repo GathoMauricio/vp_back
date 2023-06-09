@@ -26,7 +26,7 @@ class UserController extends Controller
         return view('user.create', compact('roles'));
     }
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'role_id' => 'required',
