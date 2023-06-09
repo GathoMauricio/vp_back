@@ -185,4 +185,38 @@ class TicketController extends Controller
             return "Error al eliminar";
         }
     }
+
+    public function changeStatus(Request $request)
+    {
+        $ticket = Ticket::findOrFail($request->ticket_id);
+        switch ($request->status_id) {
+            case 2: //Marcar como aprobado
+                $ticket->status_id = $request->status_id;
+                break;
+            case 3: //Marcar como en proceso
+                $ticket->status_id = $request->status_id;
+                $ticket->inicio = date('Y-m-d H:i:s');
+                $ticket->clase_id = 1;
+                break;
+            case 4: //Marcar como terminado
+                $ticket->status_id = $request->status_id;
+                $ticket->cierre = date('Y-m-d H:i:s');
+                $ticket->clase_id = $this->calculateClassId($ticket->inicio, $ticket->cierre);
+                break;
+            case 5: //Marcar como finalizado
+                $ticket->status_id = $request->status_id;
+                break;
+        }
+        if ($ticket->save()) {
+            return "Estatus del ticket actualizado";
+        } else {
+            return "Error al eliminar";
+        }
+    }
+
+    public function calculateClassId($initTime, $currentTime)
+    {
+        #TODO: Calcular clase con base al tabulador
+        return 5;
+    }
 }

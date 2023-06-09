@@ -32,11 +32,49 @@
                         <span class="float-left">Clase: <b>N|A</b></span>
                     @break
                 @endswitch
-                <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
-                    <br>
-                    <small><a href="javascript:void(0)">Marcar como aprobado</a></small>
-                </span>
+                @switch($ticket->status->id)
+                    @case(1)
+                        <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
+                            <br>
+                            <small><a onclick="changeTicketStatus({{ $ticket->id }},2);" href="javascript:void(0)">Marcar como
+                                    aprobado</a></small>
+                        </span>
+                    @break
 
+                    @case(2)
+                        <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
+                            <br>
+                            <small><a onclick="changeTicketStatus({{ $ticket->id }},3);" href="javascript:void(0)">Marcar como en
+                                    proceso</a></small>
+                        </span>
+                    @break
+
+                    @case(3)
+                        <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
+                            <br>
+                            <small><a onclick="changeTicketStatus({{ $ticket->id }},4);" href="javascript:void(0)">Marcar como
+                                    terminado</a></small>
+                        </span>
+                    @break
+
+                    @case(4)
+                        <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
+                            <br>
+                            <small><a onclick="changeTicketStatus({{ $ticket->id }},5);" href="javascript:void(0)">Marcar como
+                                    finalizado</a></small>
+                        </span>
+                    @break
+
+                    @case(5)
+                        <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
+                        </span>
+                    @break
+
+                    @case(6)
+                        <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b>
+                        </span>
+                    @break
+                @endswitch
             </h4>
             <form action="{{ route('update/ticket', $ticket->folio) }}" class="container" method="POST">
                 @csrf

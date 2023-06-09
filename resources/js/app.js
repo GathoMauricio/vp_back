@@ -343,3 +343,32 @@ window.cancelTicket = (ticket_id, ticket) => {
         }
     );
 };
+
+window.changeTicketStatus = (ticket_id, status_id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Cambiar estatus?",
+        function () {
+            $.ajax({
+                url: "/change_status/ticket",
+                method: "POST",
+                data: {
+                    ticket_id: ticket_id,
+                    status_id: status_id,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    _method: "PUT",
+                },
+            })
+                .done(function (data) {
+                    console.log(data);
+                    alert("Estatus actualizado.");
+                    window.location.reload();
+                })
+                .fail(function (err) {
+                    console.log("error: " + JSON.stringify(err));
+                    errorNotification("Error al procesar.");
+                });
+        },
+        function () {}
+    );
+};
