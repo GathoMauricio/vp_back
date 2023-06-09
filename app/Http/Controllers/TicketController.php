@@ -163,4 +163,26 @@ class TicketController extends Controller
             return 'T-000001';
         }
     }
+
+    public function cancel(Request $request)
+    {
+        $ticket = Ticket::findOrFail($request->ticket_id);
+        $ticket->status_id = 6;
+        $ticket->motivo_cancelacion = $request->motivo_cancelacion;
+        if ($ticket->save()) {
+            return "Ticket cancelado";
+        } else {
+            return "Error al eliminar";
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $ticket = Ticket::findOrFail($request->ticket_id);
+        if ($ticket->delete()) {
+            return "Ticket eliminado";
+        } else {
+            return "Error al eliminar";
+        }
+    }
 }

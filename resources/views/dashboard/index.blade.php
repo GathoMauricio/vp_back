@@ -41,7 +41,9 @@
                         {{ $ticket->folio }}
                     </td>
                     <td class="font-weight-bold">
-                        [Servicios]
+                        @foreach ($ticket->tipos_servicios as $tipos)
+                            {{ '|' . $tipos->tipo . '|' }}
+                        @endforeach
                     </td>
                     <td class="font-weight-bold">
                         {{ $ticket->usuario->cliente->razon_social }}
@@ -94,28 +96,31 @@
                                             </span>
                     </td>
                     <td class="font-weight-bold">
-                        @switch(str_split($ticket->clase->tipo, 1)[0])
-                            @case('A')
-                                <span style="background-color:rgb(60, 230, 18);color:rgb(249, 246, 255);" data-toggle="tooltip"
-                                    title="De {{ $ticket->clase->tiempo_de }} En adelante"
-                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                @break
+                        @switch($ticket->status->id)
+                            @case(1)
+                                <span class="float-left"><b>N|A</b></span>
+                            @break
 
-                                @case('B')
-                                    <span style="background-color:rgb(212, 243, 102);color:rgb(60, 49, 83);" data-toggle="tooltip"
-                                        title="De {{ $ticket->clase->tiempo_de }} A {{ $ticket->clase->tiempo_hasta }} mins"
-                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                    @break
+                            @case(2)
+                                <span class="float-left"><b>N|A</b></span>
+                            @break
 
-                                    @case('C')
-                                        <span style="background-color:rgb(255, 74, 19);color:rgb(249, 248, 253);"
-                                            data-toggle="tooltip"
-                                            title="De {{ $ticket->clase->tiempo_de }} A {{ $ticket->clase->tiempo_hasta }} mins"
-                                            class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                        @break
-                                    @endswitch
-                                    {{ $ticket->clase->tipo }}
-                                </span>
+                            @case(3)
+                                <span class="float-left"><b>{{ $ticket->clase->tipo }}</b></span>
+                            @break
+
+                            @case(4)
+                                <span class="float-left"><b>{{ $ticket->clase->tipo }}</b></span>
+                            @break
+
+                            @case(5)
+                                <span class="float-left"><b>{{ $ticket->clase->tipo }}</b></span>
+                            @break
+
+                            @case(6)
+                                <span class="float-left"><b>N|A</b></span>
+                            @break
+                        @endswitch
                     </td>
                     <td class="font-weight-bold">
                         {{ $ticket->pagado }}
@@ -125,13 +130,14 @@
                             title="Ver órden de servicio...">
                             <span class="icon icon-eye"></span>
                         </a>
-                        <a href="{{ route('edit/ticket', $ticket->folio) }}" class="btn btn-warning" data-toggle="tooltip"
-                            title="Editar registro...">
-                            <span class="icon icon-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" data-toggle="tooltip" title="Eliminar registro...">
-                            <span class="icon icon-bin"></span>
-                        </button>
+                        @if ($ticket->status->id != 6)
+                            <a href="{{ route('edit/ticket', $ticket->folio) }}" class="btn btn-warning"
+                                data-toggle="tooltip" title="Editar registro...">
+                                <span class="icon icon-pencil"></span>
+                            </a>
+                        @endif
+                        <a href="javascript:void(0);" onclick="deleteTicket({{ $ticket->id }});"
+                            class="btn btn-danger"><span class="icon icon-bin"></span></a>
                     </td>
                 </tr>
             @endforeach

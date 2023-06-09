@@ -19,6 +19,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('show/ticket/{folio}', [TicketController::class, 'show'])->name('show/ticket');
     Route::get('edit/ticket/{folio}', [TicketController::class, 'edit'])->name('edit/ticket');
     Route::put('update/ticket/{folio}', [TicketController::class, 'update'])->name('update/ticket');
+    Route::put('cancel/ticket', [TicketController::class, 'cancel'])->name('cancel/ticket');
+    Route::delete('delete/ticket', [TicketController::class, 'delete'])->name('delete/ticket');
     //User routes
     Route::get('index/user', [UserController::class, 'index'])->name('index/user');
     Route::get('create/user', [UserController::class, 'create'])->name('create/user');

@@ -215,7 +215,7 @@ window.deleteUser = (user_id) => {
                 })
                 .fail(function (err) {
                     console.log("error: " + JSON.stringify(err));
-                    errorNotification("Error al eliminar el usuario.");
+                    errorNotification("Error al procesar.");
                 });
         },
         function () {}
@@ -243,7 +243,7 @@ window.deleteClient = (client_id) => {
                 })
                 .fail(function (err) {
                     console.log("error: " + JSON.stringify(err));
-                    errorNotification("Error al eliminar el cliente.");
+                    errorNotification("Error al procesar.");
                 });
         },
         function () {}
@@ -271,9 +271,75 @@ window.deleteClientUser = (user_id) => {
                 })
                 .fail(function (err) {
                     console.log("error: " + JSON.stringify(err));
-                    errorNotification("Error al eliminar el usuario.");
+                    errorNotification("Error al procesar.");
                 });
         },
         function () {}
+    );
+};
+
+window.deleteTicket = (ticket_id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            $.ajax({
+                url: "/delete/ticket",
+                method: "POST",
+                data: {
+                    ticket_id: ticket_id,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    _method: "DELETE",
+                },
+            })
+                .done(function (data) {
+                    console.log(data);
+                    alert("Ticket eliminado.");
+                    window.location.reload();
+                })
+                .fail(function (err) {
+                    console.log("error: " + JSON.stringify(err));
+                    errorNotification("Error al procesar.");
+                });
+        },
+        function () {}
+    );
+};
+
+window.cancelTicket = (ticket_id, ticket) => {
+    alertify.prompt(
+        "Aviso",
+        "¿Realmente desea cancelar el ticket " +
+            ticket +
+            "?\nIngrese el motivo...",
+        "",
+        function (e, reason) {
+            if (reason.length > 0) {
+                $.ajax({
+                    url: "/cancel/ticket",
+                    method: "POST",
+                    data: {
+                        ticket_id: ticket_id,
+                        motivo_cancelacion: reason,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                        _method: "PUT",
+                    },
+                })
+                    .done(function (data) {
+                        console.log(data);
+                        alert("Ticket cancelado.");
+                        window.location = "/dashboard";
+                    })
+                    .fail(function (err) {
+                        console.log("error: " + JSON.stringify(err));
+                        errorNotification("Error al procesar.");
+                    });
+            } else {
+                e.cancel = true;
+            }
+        },
+        function () {
+            return;
+        }
     );
 };

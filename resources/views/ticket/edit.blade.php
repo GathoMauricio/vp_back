@@ -604,9 +604,27 @@
                         </div>
                     </div>
                 </div>
-                <input type="button" class="btn btn-danger float-left" value="CANCELAR">
-                <input type="submit" class="btn btn-primary float-right" value="ACTUALIZAR">
-                <br><br>
+                @if ($ticket->status->id == 6)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="motivo_cancelacion" class="vp-label-form">MOTIVO DE CANCELACIÓN</label>
+                                <textarea name="motivo_cancelacion" id="motivo_cancelacion" class="form-control">{{ old('motivo_cancelacion', $ticket->motivo_cancelacion ?: '') }}</textarea>
+                                @error('comentarios_cliente')
+                                    <small style="color:red;">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @if ($ticket->status->id != 6)
+                    <input onclick="cancelTicket({{ $ticket->id }},'{{ $ticket->folio }}');" type="button"
+                        class="btn btn-danger float-left" value="CANCELAR TICKET">
+                    <input type="submit" class="btn btn-primary float-right" value="ACTUALIZAR">
+                    <br><br>
+                @endif
             </form>
         </div>
 
