@@ -35,13 +35,11 @@ class TicketController extends Controller
             'client_id' => 'required',
             'usuario_id' => 'required',
             'prioridad' => 'required',
-            'clase_id' => 'required',
             'problematica' => 'required',
         ], [
             'client_id.required' => 'No se ha seleccionad un cliente.',
             'usuario_id.required' => 'No se ha seleccionado un usuario.',
             'prioridad.required' => 'No se ha seleccionado una prioridad.',
-            'clase_id.required' => 'No se ha seleccionado una clase.',
             'problematica.required' => 'No se ha indicado una problemática.',
         ]);
         $ticket = Ticket::create([

@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                {{--  <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="problematica" class="vp-label-form">SERVICIOS*</label>
@@ -174,7 +174,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div>  --}}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
