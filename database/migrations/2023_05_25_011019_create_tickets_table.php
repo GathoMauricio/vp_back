@@ -53,6 +53,7 @@ class CreateTicketsTable extends Migration
             $table->string('motivo_cancelacion')->nullable();
             $table->string('cotizar_producto')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

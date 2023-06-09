@@ -6,6 +6,9 @@ $(document).ready(function () {
     if ($("#dashboard_table").length) {
         crearDatatable("dashboard_table");
     }
+    if ($("#user_table").length) {
+        crearDatatable("user_table");
+    }
 });
 
 window.successNotification = (text) => alertify.success(text);
@@ -189,4 +192,32 @@ window.removeServiceType = (service_type_id) => {
             <td class="text-center" colspan="3">No se han agregado tipos de servicio</td>
         </tr>`
         );
+};
+
+window.deleteUser = (user_id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            $.ajax({
+                url: "/delete/user",
+                method: "POST",
+                data: {
+                    user_id: user_id,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    _method: "DELETE",
+                },
+            })
+                .done(function (data) {
+                    console.log(data);
+                    alert("Usuario eliminado.");
+                    window.location.reload();
+                })
+                .fail(function (err) {
+                    console.log("error: " + JSON.stringify(err));
+                    errorNotification("Error al eliminar el usuario.");
+                });
+        },
+        function () {}
+    );
 };

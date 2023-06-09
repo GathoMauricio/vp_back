@@ -6,6 +6,32 @@
         <div class="row justify-content-center">
             <h4>
                 TICKET FOLIO [{{ $ticket->folio }}]
+                <br>
+                @switch($ticket->status->id)
+                    @case(1)
+                        <span class="float-left">Clase: <b>N|A</b></span>
+                    @break
+
+                    @case(2)
+                        <span class="float-left">Clase: <b>N|A</b></span>
+                    @break
+
+                    @case(3)
+                        <span class="float-left">Clase: <b>{{ $ticket->clase->tipo }}</b></span>
+                    @break
+
+                    @case(4)
+                        <span class="float-left">Clase: <b>{{ $ticket->clase->tipo }}</b></span>
+                    @break
+
+                    @case(5)
+                        <span class="float-left">Clase: <b>{{ $ticket->clase->tipo }}</b></span>
+                    @break
+
+                    @case(6)
+                        <span class="float-left">Clase: <b>N|A</b></span>
+                    @break
+                @endswitch
                 <span class="float-right">Estatus: <b>{{ $ticket->status->nombre }}</b></span>
             </h4>
             <form action="{{ route('store/ticket') }}" class="container" method="POST">

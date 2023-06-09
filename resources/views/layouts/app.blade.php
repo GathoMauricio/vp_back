@@ -301,27 +301,9 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
-                @if (Auth::user()->rol_user_id == 1 || Auth::user()->rol_user_id == 2)
-                    <a href="{{ route('provider_index') }}">
-                        <i class="icon-cart"></i> Proveedores de retiro
-                    </a><br /><br />
-                    <a href="{{ route('index_department') }}">
-                        <i class="icon-tree"></i> Departamentos de retiro
-                    </a><br /><br />
-                    <a href="{{ route('index_account') }}">
-                        <i class="icon-credit-card"></i> Cuentas de retiro
-                    </a><br /><br />
-                    <a href="{{ route('log_index') }}">
-                        <i class="icon-database"></i> Log
-                    </a><br /><br />
-                    <a href="{{ route('index_user') }}">
-                        <i class="icon-users"></i> Usuarios
-                    </a><br /><br />
-                    <a onclick="$('#browser_notification_modal').modal();" href="javascript:void(0)">
-
-                        <i class="icon-bell"></i> Notificación página web
-                    </a><br /><br />
-                @endif
+                <a href="{{ route('index/user') }}">
+                    <i class="icon-users"></i> Control de usuarios
+                </a><br /><br />
                 <a href="#"
                     onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
@@ -362,6 +344,11 @@
     @if (Session::has('success'))
         <script type="text/javascript">
             successNotification("{{ Session::get('success') }}");
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script type="text/javascript">
+            errorNotification("{{ Session::get('error') }}");
         </script>
     @endif
     <script type="text/javascript">

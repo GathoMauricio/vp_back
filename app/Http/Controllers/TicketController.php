@@ -89,13 +89,24 @@ class TicketController extends Controller
         $clients = Client::orderBy('razon_social')->get();
         $clases = Clase::orderBy('tipo', 'DESC')->get();
         $coordinadores = User::where('role_id', 3)->orderBy('name')->get();
-        return view('ticket.edit', compact('ticket', 'clients', 'clases', 'coordinadores'));
+        $tipos_servicios = ServiceType::all();
+        return view('ticket.edit', compact('ticket', 'clients', 'clases', 'coordinadores', 'tipos_servicios'));
     }
 
-    public function update(TicketRequest $request, $folio)
+    public function update(Request $request, $folio)
     {
         $ticket = Ticket::where('folio', $folio)->first();
         $ticket->update($request->all());
+        TicketServiceType::where('ticket_id', $ticket->id)->delete();
+        if ($request->tipo) {
+            for ($i = 0; count($request->tipo) > $i; $i++) {
+                TicketServiceType::create([
+                    'ticket_id' => $ticket->id,
+                    'tipo' => $request->tipo[$i],
+                    'detalle' => $request->detalle[$i]
+                ]);
+            }
+        }
         \Session::flash('success', 'El ticket con el folio ' . $ticket->folio . ' ha sido actualizado correctamente.');
         return redirect()->route('edit/ticket', $ticket->folio);
     }
