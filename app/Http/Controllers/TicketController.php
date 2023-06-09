@@ -10,7 +10,6 @@ use App\Models\Ticket;
 use App\Models\Client;
 use App\Models\Clase;
 use App\Models\User;
-use App\Http\Requests\TicketRequest;
 
 class TicketController extends Controller
 {
@@ -32,6 +31,19 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'client_id' => 'required',
+            'usuario_id' => 'required',
+            'prioridad' => 'required',
+            'clase_id' => 'required',
+            'problematica' => 'required',
+        ], [
+            'client_id.required' => 'No se ha seleccionad un cliente.',
+            'usuario_id.required' => 'No se ha seleccionado un usuario.',
+            'prioridad.required' => 'No se ha seleccionado una prioridad.',
+            'clase_id.required' => 'No se ha seleccionado una clase.',
+            'problematica.required' => 'No se ha indicado una problemática.',
+        ]);
         $ticket = Ticket::create([
             'usuario_id' => $request->usuario_id,
             'author_id' => \Auth::user()->id,
@@ -95,6 +107,18 @@ class TicketController extends Controller
 
     public function update(Request $request, $folio)
     {
+
+        $request->validate([
+            'client_id' => 'required',
+            'usuario_id' => 'required',
+            'prioridad' => 'required',
+            'problematica' => 'required',
+        ], [
+            'client_id.required' => 'No se ha seleccionad un cliente.',
+            'usuario_id.required' => 'No se ha seleccionado un usuario.',
+            'prioridad.required' => 'No se ha seleccionado una prioridad.',
+            'problematica.required' => 'No se ha indicado una problemática.',
+        ]);
         $ticket = Ticket::where('folio', $folio)->first();
         $ticket->update($request->all());
         TicketServiceType::where('ticket_id', $ticket->id)->delete();

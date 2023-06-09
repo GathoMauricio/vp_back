@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
-use App\http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -29,6 +28,21 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
+        $request->validate([
+            'role_id' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required_with:password|same:password|min:6'
+        ], [
+            'role_id.required' => 'Seleccione in rol para e usuario',
+            'name.required' => 'Ingrese un nombre al usuario.',
+            'email.required' => 'Ingrese un email al usuario.',
+            'email.email' => 'Ingrese un email válido.',
+            'password.required' => 'Ingrese una contraseña al usuario.',
+            'password.min' => 'La contraseña debe contener mínimo 6 caracteres.',
+        ]);
+
         $user = User::create([
             'role_id' => $request->role_id, //Rol de Administrador
             'name' => $request->name,
