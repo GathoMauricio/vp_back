@@ -26,6 +26,10 @@ class User extends Authenticatable
         'telefono',
         'direccion',
         'area',
+        'sepomex_id',
+        'num_int',
+        'num_ext',
+        'cp',
     ];
 
     public function role()
@@ -43,6 +47,16 @@ class User extends Authenticatable
         return $this->belongsTo(
             'App\Models\Client',
             'client_id',
+            'id'
+        )
+            ->withDefault();
+    }
+
+    public function sepomex()
+    {
+        return $this->belongsTo(
+            'App\Models\Sepomex',
+            'sepomex_id',
             'id'
         )
             ->withDefault();

@@ -49,6 +49,10 @@ class UserController extends Controller
             'email' => $request->email,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
+            'sepomex_id' => $request->sepomex_id,
+            'num_ext' => $request->num_ext,
+            'num_int' => $request->num_int,
+            'cp' => $request->cp,
             'password' => bcrypt($request->password),
         ]);
         if ($user) {
@@ -82,6 +86,10 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->telefono = $request->telefono;
         $user->direccion = $request->direccion;
+        $user->sepomex_id = $request->sepomex_id;
+        $user->num_ext = $request->num_ext;
+        $user->num_int = $request->num_int;
+        $user->cp = $request->cp;
 
         if ($user->save()) {
             \Session::flash('success', 'El usuario ' . $user->name . ' ha sido actualizado correctamente.');

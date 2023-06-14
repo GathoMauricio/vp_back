@@ -372,3 +372,40 @@ window.changeTicketStatus = (ticket_id, status_id) => {
         function () {}
     );
 };
+
+window.loadSepomex = (cp) => {
+    if (cp.length > 0) {
+        $.ajax({
+            url: "/api/load_sepomex/" + cp,
+            method: "GET",
+            data: {
+                cp: cp,
+            },
+        })
+            .done(function (data) {
+                let html = ``;
+                let counter = 0;
+                $.each(JSON.parse(data), function (index, item) {
+                    counter++;
+                    html +=
+                        "<option value='" +
+                        item.id +
+                        "'>" +
+                        item.asentamiento +
+                        "</option>";
+                });
+                $("#asentamiento").html(html);
+                if (counter <= 0) {
+                    $("#asentamiento").html("");
+                    $("#ciudad").val("");
+                    $("#municipio").val("");
+                } else {
+                    $("#ciudad").val(JSON.parse(data)[0].ciudad);
+                    $("#municipio").val(JSON.parse(data)[0].municipio);
+                }
+            })
+            .fail(function (err) {
+                console.log("error: " + JSON.stringify(err));
+            });
+    }
+};
