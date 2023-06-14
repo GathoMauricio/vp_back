@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldsToUsers extends Migration
+class AddApellidoToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class AddFieldsToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->biginteger('sepomex_id')->nullable();
-            $table->string('num_int')->nullable();
-            $table->string('num_ext')->nullable();
-            $table->string('cp')->nullable();
+            $table->string('apellido')->nullable();
         });
     }
 
@@ -29,10 +26,7 @@ class AddFieldsToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('sepomex_id');
-            $table->dropColumn('num_int');
-            $table->dropColumn('num_ext');
-            $table->dropColumn('cp');
+            $table->dropColumn('apellido');
         });
     }
 }

@@ -46,6 +46,7 @@ class UserController extends Controller
         $user = User::create([
             'role_id' => $request->role_id,
             'name' => $request->name,
+            'apellido' => $request->apellido,
             'email' => $request->email,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
@@ -84,6 +85,7 @@ class UserController extends Controller
 
         $user->role_id = $request->role_id;
         $user->name = $request->name;
+        $user->apellido = $request->apellido;
         $user->telefono = $request->telefono;
         $user->direccion = $request->direccion;
         $user->sepomex_id = $request->sepomex_id;
