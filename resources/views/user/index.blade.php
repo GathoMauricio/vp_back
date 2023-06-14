@@ -24,6 +24,9 @@
                             TELÉFONO
                         </th>
                         <th style="color:white;">
+                            DIRECCIÓN
+                        </th>
+                        <th style="color:white;">
 
                         </th>
                     </tr>
@@ -35,6 +38,11 @@
                             <td>{{ $user->name }} {{ $user->apellido }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->telefono }}</td>
+                            <td>
+                                {{ $user->sepomex->cp }} {{ $user->sepomex->estado }} {{ $user->sepomex->municipio }}
+                                {{ $user->sepomex->ciudad }} {{ $user->sepomex->asentamiento }} {{ $user->num_ext }}
+                                {{ $user->num_int }}
+                            </td>
                             <td>
                                 <a href="{{ route('edit/user', $user->id) }}" class="btn btn-warning"><span
                                         class="icon icon-pencil"></span></a>

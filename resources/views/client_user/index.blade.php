@@ -21,6 +21,9 @@
                             TELÉFONO
                         </th>
                         <th style="color:white;">
+                            DIRECCIÓN
+                        </th>
+                        <th style="color:white;">
                             ÁREA
                         </th>
                         <th style="color:white;">
@@ -31,9 +34,14 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->name }} {{ $user->apellido }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->telefono }}</td>
+                            <td>
+                                {{ $user->sepomex->cp }} {{ $user->sepomex->estado }} {{ $user->sepomex->municipio }}
+                                {{ $user->sepomex->ciudad }} {{ $user->sepomex->asentamiento }} {{ $user->num_ext }}
+                                {{ $user->num_int }}
+                            </td>
                             <td>{{ $user->area }}</td>
                             <td>
                                 <a href="{{ route('edit/client_user', $user->id) }}" class="btn btn-warning"><span

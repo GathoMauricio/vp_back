@@ -42,10 +42,15 @@ class ClientUserController extends Controller
             'role_id' => 4,
             'client_id' => $id,
             'name' => $request->name,
+            'apellido' => $request->apellido,
             'email' => $request->email,
             'area' => $request->area,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
+            'sepomex_id' => $request->sepomex_id,
+            'num_ext' => $request->num_ext,
+            'num_int' => $request->num_int,
+            'cp' => $request->cp,
             'password' => bcrypt($request->password),
         ]);
         if ($user) {
@@ -80,9 +85,14 @@ class ClientUserController extends Controller
         $user = User::findOrFail($id);
 
         $user->name = $request->name;
+        $user->apellido = $request->apellido;
         $user->telefono = $request->telefono;
         $user->area = $request->area;
         $user->direccion = $request->direccion;
+        $user->sepomex_id = $request->sepomex_id;
+        $user->num_ext = $request->num_ext;
+        $user->num_int = $request->num_int;
+        $user->cp = $request->cp;
 
         if ($user->save()) {
             \Session::flash('success', 'El usuario ' . $user->name . ' ha sido actualizado correctamente.');
