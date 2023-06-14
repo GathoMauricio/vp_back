@@ -54,46 +54,67 @@
                     <td class="font-weight-bold">
                         {{ $ticket->usuario->name }}
                     </td>
-                    <td class="font-weight-bold">
+                    <td class="font-weight-bold text-center">
                         @switch($ticket->status_id)
                             @case(1)
                                 <span style="background-color:gray;color:white;" data-toggle="tooltip"
                                     title="{{ $ticket->status->descripcion }}"
                                     class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                @break
+                                    {{ $ticket->status->nombre }}
+                                </span>
+                                <br>
+                                <small><b>{{ dateToString($ticket->created_at) }}</b></small>
+                            @break
 
-                                @case(2)
-                                    <span style="background-color:rgb(74, 126, 204);color:rgb(251, 250, 253);" data-toggle="tooltip"
-                                        title="{{ $ticket->status->descripcion }}"
-                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                    @break
+                            @case(2)
+                                <span style="background-color:rgb(74, 126, 204);color:rgb(251, 250, 253);" data-toggle="tooltip"
+                                    title="{{ $ticket->status->descripcion }}"
+                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                    {{ $ticket->status->nombre }}
+                                </span>
+                                <br>
+                                <small><b>{!! dateToString($ticket->aprobado_time) !!}</b></small>
+                            @break
 
-                                    @case(3)
-                                        <span style="background-color:rgb(212, 243, 102);color:rgb(60, 49, 83);"
-                                            data-toggle="tooltip" title="{{ $ticket->status->descripcion }}"
-                                            class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                        @break
+                            @case(3)
+                                <span style="background-color:rgb(212, 243, 102);color:rgb(60, 49, 83);" data-toggle="tooltip"
+                                    title="{{ $ticket->status->descripcion }}"
+                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                    {{ $ticket->status->nombre }}
+                                </span>
+                                <br>
+                                <small><b>{!! dateToString($ticket->inicio) !!}</b></small>
+                            @break
 
-                                        @case(4)
-                                            <span style="background-color:rgb(235, 175, 65);color:rgb(245, 244, 247);"
-                                                data-toggle="tooltip" title="{{ $ticket->status->descripcion }}"
-                                                class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                            @break
+                            @case(4)
+                                <span style="background-color:rgb(235, 175, 65);color:rgb(245, 244, 247);" data-toggle="tooltip"
+                                    title="{{ $ticket->status->descripcion }}"
+                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                    {{ $ticket->status->nombre }}
+                                </span>
+                                <br>
+                                <small><b>{!! dateToString($ticket->cierre) !!}</b></small>
+                            @break
 
-                                            @case(5)
-                                                <span style="background-color:rgb(60, 230, 18);color:rgb(249, 246, 255);"
-                                                    data-toggle="tooltip" title="{{ $ticket->status->descripcion }}"
-                                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                                @break
+                            @case(5)
+                                <span style="background-color:rgb(60, 230, 18);color:rgb(249, 246, 255);" data-toggle="tooltip"
+                                    title="{{ $ticket->status->descripcion }}"
+                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                    {{ $ticket->status->nombre }}
+                                </span>
+                                <br>
+                                <small><b>{!! dateToString($ticket->finalizado_time) !!}</b></small>
+                            @break
 
-                                                @case(6)
-                                                    <span style="background-color:rgb(255, 74, 19);color:rgb(249, 248, 253);"
-                                                        data-toggle="tooltip" title="{{ $ticket->status->descripcion }}"
-                                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                                                    @break
-                                                @endswitch
-                                                {{ $ticket->status->nombre }}
-                                            </span>
+                            @case(6)
+                                <span style="background-color:rgb(255, 74, 19);color:rgb(249, 248, 253);" data-toggle="tooltip"
+                                    title="{{ $ticket->status->descripcion }}"
+                                    class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                    {{ $ticket->status->nombre }}
+                                </span>
+                            @break
+                        @endswitch
+
                     </td>
                     <td class="font-weight-bold">
                         @switch($ticket->status->id)

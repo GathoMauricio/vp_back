@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Ticket extends Model
 {
     use HasFactory, SoftDeletes;
@@ -52,7 +53,9 @@ class Ticket extends Model
         'firma_ing_servicio',
         'pagado',
         'motivo_cancelacion',
-        'cotizar_producto'
+        'cotizar_producto',
+        'aprobado_time',
+        'finalizado_time',
     ];
     protected static function boot()
     {

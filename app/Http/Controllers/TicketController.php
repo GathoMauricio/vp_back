@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\TicketServiceType;
 use App\Models\ServiceType;
 use App\Models\Service;
@@ -192,19 +193,21 @@ class TicketController extends Controller
         switch ($request->status_id) {
             case 2: //Marcar como aprobado
                 $ticket->status_id = $request->status_id;
+                $ticket->aprobado_time = Carbon::now();
                 break;
             case 3: //Marcar como en proceso
                 $ticket->status_id = $request->status_id;
-                $ticket->inicio = date('Y-m-d H:i:s');
+                $ticket->inicio = Carbon::now();
                 $ticket->clase_id = 1;
                 break;
             case 4: //Marcar como terminado
                 $ticket->status_id = $request->status_id;
-                $ticket->cierre = date('Y-m-d H:i:s');
+                $ticket->cierre = Carbon::now();
                 $ticket->clase_id = $this->calculateClassId($ticket->inicio, $ticket->cierre);
                 break;
             case 5: //Marcar como finalizado
                 $ticket->status_id = $request->status_id;
+                $ticket->finalizado_time = Carbon::now();
                 break;
         }
         if ($ticket->save()) {

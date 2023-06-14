@@ -67,8 +67,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    //'timezone' => 'America/Mexico_City',
+    'timezone' => "America/Mazatlan",
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'es',
+    'locale' => 'es-MX',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'es',
+    'fallback_locale' => 'es-MX',
 
     /*
     |--------------------------------------------------------------------------
