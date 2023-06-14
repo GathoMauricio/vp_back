@@ -19,10 +19,24 @@ class Client extends Model
         'telefono',
         'direccion',
         'rfc',
+        'sepomex_id',
+        'num_int',
+        'num_ext',
+        'cp',
     ];
 
     public function users()
     {
         return $this->hasMany('App\Models\User', 'client_id');
+    }
+
+    public function sepomex()
+    {
+        return $this->belongsTo(
+            'App\Models\Sepomex',
+            'sepomex_id',
+            'id'
+        )
+            ->withDefault();
     }
 }

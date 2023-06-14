@@ -33,7 +33,11 @@
                         <tr>
                             <td>{{ $client->razon_social }}</td>
                             <td>{{ $client->telefono }}</td>
-                            <td>{{ $client->direccion }}</td>
+                            <td>
+                                {{ $client->sepomex->cp }} {{ $client->sepomex->estado }} {{ $client->sepomex->municipio }}
+                                {{ $client->sepomex->ciudad }} {{ $client->sepomex->asentamiento }} {{ $client->num_ext }}
+                                {{ $client->num_int }}
+                            </td>
                             <td>{{ $client->rfc }}</td>
                             <td>
                                 <a href="{{ route('index/client_user', $client->id) }}" class="btn btn-info"><span

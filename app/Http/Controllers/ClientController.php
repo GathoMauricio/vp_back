@@ -36,6 +36,10 @@ class ClientController extends Controller
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
             'rfc' => $request->rfc,
+            'sepomex_id' => $request->sepomex_id,
+            'num_ext' => $request->num_ext,
+            'num_int' => $request->num_int,
+            'cp' => $request->cp,
         ]);
         if ($client) {
             \Session::flash('success', 'El cliente ' . $client->razon_social . ' ha sido almacenado correctamente.');
@@ -69,6 +73,10 @@ class ClientController extends Controller
         $client->telefono = $request->telefono;
         $client->direccion = $request->direccion;
         $client->rfc = $request->rfc;
+        $client->sepomex_id = $request->sepomex_id;
+        $client->num_ext = $request->num_ext;
+        $client->num_int = $request->num_int;
+        $client->cp = $request->cp;
         if ($client->save()) {
             \Session::flash('success', 'El cliente ' . $client->razon_social . ' ha sido actualizado correctamente.');
             return redirect()->route('index/client');
