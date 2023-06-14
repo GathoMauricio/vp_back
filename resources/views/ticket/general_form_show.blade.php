@@ -95,7 +95,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label for="problematica" class="vp-label-form">PROBLEMÁTICA*</label>
+            <label for="problematica" class="vp-label-form">PROBLEMATICA / SOLICITUD*</label>
             <input value="{{ $ticket->problematica }}" class="form-control" readonly>
         </div>
     </div>

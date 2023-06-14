@@ -201,7 +201,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="problematica" class="vp-label-form">PROBLEMÁTICA*</label>
+                <label for="problematica" class="vp-label-form">PROBLEMATICA / SOLICITUD*</label>
                 <textarea name="problematica" id="problematica" class="form-control">{{ old('problematica', $ticket->problematica ?: '') }}</textarea>
                 @error('problematica')
                     <small style="color:red;">

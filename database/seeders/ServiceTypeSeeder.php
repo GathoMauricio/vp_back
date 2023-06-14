@@ -14,6 +14,8 @@ class ServiceTypeSeeder extends Seeder
      */
     public function run()
     {
+        ServiceType::truncate();
+
         ServiceType::create(
             [
                 'tipo' => 'Producto',
@@ -22,7 +24,7 @@ class ServiceTypeSeeder extends Seeder
         );
         ServiceType::create(
             [
-                'tipo' => 'Soporte Precencial',
+                'tipo' => 'Soporte Presencial',
                 'abrev' => 'SOP. PRES..',
             ]
         );
