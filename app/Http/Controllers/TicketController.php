@@ -219,7 +219,8 @@ class TicketController extends Controller
 
     public function calculateClassId($initTime, $currentTime)
     {
-        #TODO: Calcular clase con base al tabulador
-        return 5;
+        $clases = Clase::orderBy('id');
+        foreach ($clases as $clases) {
+        }
     }
 }

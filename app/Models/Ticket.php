@@ -56,6 +56,7 @@ class Ticket extends Model
         'cotizar_producto',
         'aprobado_time',
         'finalizado_time',
+        'precio',
     ];
     protected static function boot()
     {
