@@ -469,11 +469,11 @@
             </div>
         </div>
     </div>
-    <h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
-        CALIFICACIÓN DE SERVICIO
-    </h5>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
+                CALIFICACIÓN DE SERVICIO
+            </h5>
             <table style="width: 100%;">
                 <tr>
                     <td class="text-center">
@@ -526,6 +526,42 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
+                ESTATUS PAGADO
+            </h5>
+            <select name="pagado" id="pagado" class="form-select">
+                @switch($ticket->pagado)
+                    @case('N|A')
+                        <option value="N|A" selected>NO APLICA</option>
+                        <option value="PPP">PENDIENTE POR PAGAR</option>
+                        <option value="PAG">PAGADO</option>
+                        <option value="PPD">PAGADO POR PARCIALIDADES O DIFERIDO </option>
+                    @break
+
+                    @case('PPP')
+                        <option value="N|A">NO APLICA</option>
+                        <option value="PPP" selected>PENDIENTE POR PAGAR</option>
+                        <option value="PAG">PAGADO</option>
+                        <option value="PPD">PAGADO POR PARCIALIDADES O DIFERIDO </option>
+                    @break
+
+                    @case('PAG')
+                        <option value="N|A">NO APLICA</option>
+                        <option value="PPP">PENDIENTE POR PAGAR</option>
+                        <option value="PAG" selected>PAGADO</option>
+                        <option value="PPD">PAGADO POR PARCIALIDADES O DIFERIDO </option>
+                    @break
+
+                    @case('PPD')
+                        <option value="N|A">NO APLICA</option>
+                        <option value="PPP">PENDIENTE POR PAGAR</option>
+                        <option value="PAG">PAGADO</option>
+                        <option value="PPD" selected>PAGADO POR PARCIALIDADES O DIFERIDO </option>
+                    @break
+                @endswitch
+            </select>
         </div>
     </div>
     <hr style="height:2px; width:100%; border-width:0; color:#60b22f; background-color:#60b22f">

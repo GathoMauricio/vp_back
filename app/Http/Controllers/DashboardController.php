@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        \Artisan::call('class:calculate');
         $tickets = Ticket::orderBy('created_at', 'DESC')->get();
         return view('dashboard.index', compact('tickets'));
     }

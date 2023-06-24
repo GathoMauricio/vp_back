@@ -262,11 +262,11 @@
         </div>
     </div>
 </div>
-<h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
-    CALIFICACIÓN DE SERVICIO
-</h5>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
+        <h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
+            CALIFICACIÓN DE SERVICIO
+        </h5>
         <table style="width: 100%;">
             <tr>
                 <td class="text-center">
@@ -319,6 +319,30 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="col-md-6">
+        <h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
+            ESTATUS PAGADO
+        </h5>
+        <h6 class="text-center font-weight-bold">
+            @switch($ticket->pagado)
+                @case('N|A')
+                    NO APLICA
+                @break
+
+                @case('PPP')
+                    PENDIENTE POR PAGAR
+                @break
+
+                @case('PAG')
+                    PAGADO
+                @break
+
+                @case('PPD')
+                    PAGADO POR PARCIALIDADES O DIFERIDO
+                @break
+            @endswitch
+        </h6>
     </div>
 </div>
 <hr style="height:2px; width:100%; border-width:0; color:#60b22f; background-color:#60b22f">

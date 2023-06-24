@@ -40,13 +40,6 @@ class CalculateClassCommand extends Command
      */
     public function handle()
     {
-        // \Log::debug("Inicio command class:calcuate");
-        // $clases = Clase::orderBy('id')->get();
-        // foreach ($clases as $clase) {
-        //\Log::debug("desde: " . $clase->tiempo_de . " hasta: " . $clase->tiempo_hasta);
-        //}
-
-
         $tickets = Ticket::where('status_id', 3)->get();
         foreach ($tickets as $ticket) {
             $inicio = Carbon::createFromFormat('Y-m-d H:i:s', $ticket->inicio);
