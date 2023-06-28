@@ -409,3 +409,12 @@ window.loadSepomex = (cp) => {
             });
     }
 };
+
+window.cotizarProducto = (value) => {
+    if (value == "SI") {
+        $("#especifique_cotizar_producto").css("display", "block");
+    } else {
+        $("#especifique_cotizar_producto").css("display", "none");
+        $("#especifique_cotizar_producto").val("");
+    }
+};

@@ -48,7 +48,6 @@ class TicketController extends Controller
             'author_id' => \Auth::user()->id,
             'coordinador_id' => $request->coordinador_id,
             'status_id' => 1,
-            //'clase_id' => $request->clase_id,
             'folio' => $this->generaFolio(),
             'inicio' => null,
             'cierre' => null,
@@ -80,6 +79,8 @@ class TicketController extends Controller
             'firma_ing_servicio' => null,
             'pagado' => 'N|A',
             'motivo_cancelacion' => null,
+            'cotizar_producto' => $request->cotizar_producto,
+            'especifique_cotizar_producto' => $request->especifique_cotizar_producto,
         ]);
         if ($request->tipo) {
             for ($i = 0; count($request->tipo) > $i; $i++) {

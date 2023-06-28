@@ -54,6 +54,7 @@ class Ticket extends Model
         'pagado',
         'motivo_cancelacion',
         'cotizar_producto',
+        'especifique_cotizar_producto',
         'aprobado_time',
         'finalizado_time',
         'precio',
