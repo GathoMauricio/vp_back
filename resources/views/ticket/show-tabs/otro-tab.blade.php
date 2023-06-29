@@ -279,13 +279,6 @@
                         </td>
                     </tr>
                 @endforeach
-                @if (count($ticket->tickets) <= 0)
-                    <tr>
-                        <td colspan="9" class="text-center">
-                            No se encontraron registros
-                        </td>
-                    </tr>
-                @endif
             </tbody>
         </table>
     </div>
