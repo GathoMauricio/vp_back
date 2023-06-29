@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\TicketServiceType;
 use App\Models\ServiceType;
+use App\Models\Category;
 use App\Models\Service;
 use App\Models\Ticket;
 use App\Models\Client;
@@ -28,7 +29,8 @@ class TicketController extends Controller
         $servicios = Service::orderBy('clase', 'DESC')->get();
         $tipos_servicios = ServiceType::all();
         $tickets = Ticket::where('status_id', '<=', 4)->where('folio', 'not like', "%|%")->get(); //tickets que aún se encuentran en espera de ser finalizados
-        return view('ticket.create', compact('clients', 'clases', 'coordinadores', 'servicios', 'tipos_servicios', 'tickets'));
+        $categories = Category::all();
+        return view('ticket.create', compact('clients', 'clases', 'coordinadores', 'servicios', 'tipos_servicios', 'tickets', 'categories'));
     }
 
     public function store(Request $request)
@@ -38,15 +40,17 @@ class TicketController extends Controller
             'usuario_id' => 'required',
             'prioridad' => 'required',
             'problematica' => 'required',
+            'category_id' => 'required',
         ], [
             'client_id.required' => 'No se ha seleccionad un cliente.',
             'usuario_id.required' => 'No se ha seleccionado un usuario.',
             'prioridad.required' => 'No se ha seleccionado una prioridad.',
             'problematica.required' => 'No se ha indicado una problemática.',
+            'category_id.required' => 'Se debe indicar una categoría.',
         ]);
         $folio = '';
         if (!$request->ticket_id) { //si no require ticket padre se genera un nuevo folio
-            $folio = $this->generaFolio();
+            $folio = $this->generaFolio($request->category_id);
         } else { //si trae ticket padre
             $ticket_padre = Ticket::find($request->ticket_id); //se busca el ticket padre
             $subticket = Ticket::where('folio', $ticket_padre->folio . '|1')->first(); //se busca si este padre ya tiene hijos
@@ -60,6 +64,7 @@ class TicketController extends Controller
         }
 
         $ticket = Ticket::create([
+            'category_id' => $request->category_id,
             'usuario_id' => $request->usuario_id,
             'author_id' => \Auth::user()->id,
             'coordinador_id' => $request->coordinador_id,
@@ -151,13 +156,14 @@ class TicketController extends Controller
         return redirect()->route('edit/ticket', $ticket->folio);
     }
 
-    private function generaFolio()
+    private function generaFolio($category_id)
     {
+        $category = Category::find($category_id);
         $last_ticket = Ticket::orderBy('folio', 'DESC')->first();
         if ($last_ticket) {
             $parts = explode('-', $last_ticket->folio);
             $newFolio = intval($parts[1]) + 1;
-            $folioString = 'T-';
+            $folioString = $category->sigla . '-';
             if ($newFolio <= 9) {
                 $folioString .= '00000' . $newFolio;
             }
@@ -178,7 +184,7 @@ class TicketController extends Controller
             }
             return $folioString;
         } else {
-            return 'T-000001';
+            return $category->sigla . '-000001';
         }
     }
 

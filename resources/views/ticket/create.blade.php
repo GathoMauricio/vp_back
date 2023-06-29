@@ -486,7 +486,22 @@
                     </h5>
                     <hr style="height:2px; width:100%; border-width:0; color:#60b22f; background-color:#60b22f">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="category_id" class="vp-label-form">CATEGORÍA</label>
+                                <select name="category_id" id="category_id" class="form-select">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->categoria }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <small style="color:red;">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="cotizar_producto" class="vp-label-form"> COTIZAR PRODUCTO</label>
                                 <select onchange="cotizarProducto(this.value)" name="cotizar_producto"
@@ -504,7 +519,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="ticket_id" class="vp-label-form"> ¿ESTE TICKET DEPENDE DE OTRO?</label>
                                 <select name="ticket_id" id="ticket_id" class="form-select select2" style="width:100%;">
@@ -523,8 +538,9 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary float-right" value="GUARDAR">
                 </div>
+                <input type="submit" class="btn btn-primary float-right" value="GUARDAR">
         </form>
+        <br><br>
     </div>
 @endsection

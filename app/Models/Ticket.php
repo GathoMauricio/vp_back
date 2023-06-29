@@ -17,6 +17,7 @@ class Ticket extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'category_id',
         'ticket_id',
         'usuario_id',
         'author_id',
@@ -130,5 +131,14 @@ class Ticket extends Model
     public function tickets() //el ticket puede tener N tickets hijos
     {
         return $this->hasMany('App\Models\Ticket', 'ticket_id');
+    }
+    public function categoria()
+    {
+        return $this->belongsTo(
+            'App\Models\Category',
+            'category_id',
+            'id'
+        )
+            ->withDefault();
     }
 }
