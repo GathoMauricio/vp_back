@@ -18,6 +18,7 @@ class TicketController extends Controller
     public function show($folio)
     {
         $ticket = Ticket::where('folio', $folio)->first();
+        //return $ticket->tickets;
         return view('ticket.show', compact('ticket'));
     }
 

@@ -4,6 +4,8 @@
     <div class="row justify-content-center">
         <h4>
             TICKET FOLIO [{{ $ticket->folio }}]
+            &nbsp;<a href="{{ route('edit/ticket', $ticket->folio) }}" data-toggle="tooltip" title="Editar ticket..."><span
+                    class="icon icon-pencil"></span></a>
             <br>
             @switch($ticket->status->id)
                 @case(1)
@@ -31,6 +33,7 @@
                 @break
             @endswitch
         </h4>
+
         @include('ticket.show-tabs.tabs')
         <div class="tab-content" id="myTabContent">
             @include('ticket.show-tabs.datos-cliente-tab')
