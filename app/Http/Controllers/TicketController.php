@@ -123,7 +123,8 @@ class TicketController extends Controller
         $clases = Clase::orderBy('tipo', 'DESC')->get();
         $coordinadores = User::where('role_id', 3)->orderBy('name')->get();
         $tipos_servicios = ServiceType::all();
-        return view('ticket.edit', compact('ticket', 'clients', 'clases', 'coordinadores', 'tipos_servicios'));
+        $categories = Category::all();
+        return view('ticket.edit', compact('ticket', 'clients', 'clases', 'coordinadores', 'tipos_servicios', 'categories'));
     }
 
     public function update(Request $request, $folio)
@@ -134,11 +135,13 @@ class TicketController extends Controller
             'usuario_id' => 'required',
             'prioridad' => 'required',
             'problematica' => 'required',
+            'category_id' => 'required',
         ], [
             'client_id.required' => 'No se ha seleccionad un cliente.',
             'usuario_id.required' => 'No se ha seleccionado un usuario.',
             'prioridad.required' => 'No se ha seleccionado una prioridad.',
             'problematica.required' => 'No se ha indicado una problemática.',
+            'category_id.required' => 'Se debe indicar una categoría.',
         ]);
         $ticket = Ticket::where('folio', $folio)->first();
         $ticket->update($request->all());
