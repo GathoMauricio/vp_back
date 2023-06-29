@@ -53,6 +53,7 @@ class TicketController extends Controller
         if (!$request->ticket_id) { //si no require ticket padre se genera un nuevo folio
             $folio = $this->generaFolio($request->category_id);
         } else { //si trae ticket padre
+
             $ticket_padre = Ticket::find($request->ticket_id); //se busca el ticket padre
             $subticket = Ticket::where('folio', $ticket_padre->folio . '|1')->first(); //se busca si este padre ya tiene hijos
             if (!$subticket) { //si no tiene hijos se crea su primer hijo
@@ -65,6 +66,7 @@ class TicketController extends Controller
         }
 
         $ticket = Ticket::create([
+            'ticket_id' => $request->ticket_id ? $request->ticket_id : null,
             'category_id' => $request->category_id,
             'usuario_id' => $request->usuario_id,
             'author_id' => \Auth::user()->id,
