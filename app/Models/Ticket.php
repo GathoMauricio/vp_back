@@ -17,6 +17,7 @@ class Ticket extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'ticket_id',
         'usuario_id',
         'author_id',
         'coordinador_id',
@@ -113,9 +114,21 @@ class Ticket extends Model
         )
             ->withDefault();
     }
-
     public function tipos_servicios()
     {
         return $this->hasMany('App\Models\TicketServiceType', 'ticket_id');
+    }
+    public function ticket() //el ticket puede pertenecer a un ticket padre
+    {
+        return $this->belongsTo(
+            'App\Models\Ticket',
+            'ticket_id',
+            'id'
+        )
+            ->withDefault();
+    }
+    public function tickets() //el ticket puede tener N tickets hijos
+    {
+        return $this->hasMany('App\Models\Ticket', 'ticket_id');
     }
 }

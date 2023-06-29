@@ -508,8 +508,12 @@
                             <div class="form-group">
                                 <label for="ticket_id" class="vp-label-form"> ¿ESTE TICKET DEPENDE DE OTRO?</label>
                                 <select name="ticket_id" id="ticket_id" class="form-select select2" style="width:100%;">
-                                    <option>NO</option>
-                                    <option value="TEST">TEST</option>
+                                    <option value>NO</option>
+                                    @foreach ($tickets as $ticket)
+                                        <option value="{{ $ticket->id }}">{{ $ticket->folio }} -
+                                            {{ $ticket->usuario->cliente->razon_social }} - {{ $ticket->usuario->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('cotizar_producto')
                                     <small style="color:red;">

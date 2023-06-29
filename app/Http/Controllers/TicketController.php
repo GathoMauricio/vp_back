@@ -27,7 +27,8 @@ class TicketController extends Controller
         $coordinadores = User::where('role_id', 3)->orderBy('name')->get();
         $servicios = Service::orderBy('clase', 'DESC')->get();
         $tipos_servicios = ServiceType::all();
-        return view('ticket.create', compact('clients', 'clases', 'coordinadores', 'servicios', 'tipos_servicios'));
+        $tickets = Ticket::where('status_id', '<=', 4)->where('folio', 'not like', "%|%")->get(); //tickets que aún se encuentran en espera de ser finalizados
+        return view('ticket.create', compact('clients', 'clases', 'coordinadores', 'servicios', 'tipos_servicios', 'tickets'));
     }
 
     public function store(Request $request)
@@ -43,12 +44,27 @@ class TicketController extends Controller
             'prioridad.required' => 'No se ha seleccionado una prioridad.',
             'problematica.required' => 'No se ha indicado una problemática.',
         ]);
+        $folio = '';
+        if (!$request->ticket_id) { //si no require ticket padre se genera un nuevo folio
+            $folio = $this->generaFolio();
+        } else { //si trae ticket padre
+            $ticket_padre = Ticket::find($request->ticket_id); //se busca el ticket padre
+            $subticket = Ticket::where('folio', $ticket_padre->folio . '|1')->first(); //se busca si este padre ya tiene hijos
+            if (!$subticket) { //si no tiene hijos se crea su primer hijo
+                $folio = $ticket_padre->folio . '|1';
+            } else { //si ya tiene hijos vemos cual es el último para sumarle uno más
+                $partes = explode('-', $subticket->folio);
+                $cont =  intval($partes[1]) + 1;
+                $folio = $ticket_padre->folio . '|' . $cont;
+            }
+        }
+
         $ticket = Ticket::create([
             'usuario_id' => $request->usuario_id,
             'author_id' => \Auth::user()->id,
             'coordinador_id' => $request->coordinador_id,
             'status_id' => 1,
-            'folio' => $this->generaFolio(),
+            'folio' => $folio,
             'inicio' => null,
             'cierre' => null,
             'prioridad' => $request->prioridad,
