@@ -141,4 +141,8 @@ class Ticket extends Model
         )
             ->withDefault();
     }
+    public function vales() //el ticket puede tener N vales
+    {
+        return $this->hasMany('App\Models\ExpenseVoucher', 'ticket_id');
+    }
 }

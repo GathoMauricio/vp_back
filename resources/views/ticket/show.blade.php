@@ -41,6 +41,7 @@
             @include('ticket.show-tabs.datos-equipo-tab')
             @include('ticket.show-tabs.caso-aplique-tab')
             @include('ticket.show-tabs.valoracion-tecnica-tab')
+            @include('ticket.show-tabs.vale-gastos-tab')
             @include('ticket.show-tabs.otro-tab')
         </div>
         <br><br>

@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use App\Models\TicketServiceType;
 use App\Models\ServiceType;
 use App\Models\Category;
+use App\Models\Provider;
+use App\Models\Concept;
 use App\Models\Service;
 use App\Models\Ticket;
 use App\Models\Client;
@@ -18,8 +20,10 @@ class TicketController extends Controller
     public function show($folio)
     {
         $ticket = Ticket::where('folio', $folio)->first();
-        //return $ticket->tickets;
-        return view('ticket.show', compact('ticket'));
+        $proveedores = Provider::all();
+        $conceptos = Concept::all();
+        $users = User::all();
+        return view('ticket.show', compact('ticket', 'proveedores', 'conceptos', 'users'));
     }
 
     public function create()
@@ -127,7 +131,10 @@ class TicketController extends Controller
         $coordinadores = User::where('role_id', 3)->orderBy('name')->get();
         $tipos_servicios = ServiceType::all();
         $categories = Category::all();
-        return view('ticket.edit', compact('ticket', 'clients', 'clases', 'coordinadores', 'tipos_servicios', 'categories'));
+        $proveedores = Provider::all();
+        $conceptos = Concept::all();
+        $users = User::all();
+        return view('ticket.edit', compact('ticket', 'clients', 'clases', 'coordinadores', 'tipos_servicios', 'categories', 'proveedores', 'conceptos', 'users'));
     }
 
     public function update(Request $request, $folio)

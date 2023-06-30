@@ -88,6 +88,7 @@
                 @include('ticket.edit-tabs.datos-equipo-tab')
                 @include('ticket.edit-tabs.caso-aplique-tab')
                 @include('ticket.edit-tabs.valoracion-tecnica-tab')
+                @include('ticket.edit-tabs.vale-gastos-tab')
                 @include('ticket.edit-tabs.otro-tab')
                 @if ($ticket->status->id != 6)
                     <input onclick="cancelTicket({{ $ticket->id }},'{{ $ticket->folio }}');" type="button"

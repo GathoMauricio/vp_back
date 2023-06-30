@@ -6,6 +6,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientUserController;
+use App\Http\Controllers\ExpenseVoucherController;
 //Rutas de autenticación
 Auth::routes();
 //Ruta raiz (si el usuario no está autenticado se envia al login de lo contrario se envia al dashboard)
@@ -43,4 +44,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit/client_user/{id}', [ClientUserController::class, 'edit'])->name('edit/client_user');
     Route::put('update/client_user/{id}', [ClientUserController::class, 'update'])->name('update/client_user');
     Route::delete('delete/client_user', [ClientUserController::class, 'delete'])->name('delete/client_user');
+    //Expense voucher routes
+    Route::get('get/expense_voucher', [ExpenseVoucherController::class, 'get'])->name('store/get');
+    Route::get('show/expense_voucher', [ExpenseVoucherController::class, 'show'])->name('store/show');
+    Route::post('store/expense_voucher', [ExpenseVoucherController::class, 'store'])->name('store/expense_voucher');
+    Route::put('update/expense_voucher', [ExpenseVoucherController::class, 'update'])->name('update/expense_voucher');
+    Route::delete('delete/expense_voucher', [ExpenseVoucherController::class, 'delete'])->name('delete/expense_voucher');
 });

@@ -25,6 +25,10 @@
             TÉCNICA</button>
     </li>
     <li class="nav-item" role="presentation">
+        <button class="nav-link" id="vale-gastos-tab" data-bs-toggle="tab" data-bs-target="#vale-gastos" type="button"
+            role="tab" aria-controls="vale-gastos" aria-selected="false">VALE DE GASTOS</button>
+    </li>
+    <li class="nav-item" role="presentation">
         <button class="nav-link" id="otro-tab" data-bs-toggle="tab" data-bs-target="#otro" type="button"
             role="tab" aria-controls="otro" aria-selected="false">OTRO</button>
     </li>
