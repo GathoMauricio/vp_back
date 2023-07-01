@@ -79,7 +79,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="detalle" class="vp-label-form">DETALLE</label>
-                                <textarea name="detalle" id="show_expense_detalle" class="form-control" readonly></textarea>
+                                <textarea id="show_expense_detalle" class="form-control" readonly></textarea>
                             </div>
                         </div>
                     </div>
