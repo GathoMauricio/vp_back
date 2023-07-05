@@ -22,6 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/font.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed layout-fixed sidebar-collapse ">
@@ -366,6 +367,7 @@
             @yield('ready_scripts')
         });
     </script>
+    @livewireScripts
 </body>
 
 </html>
