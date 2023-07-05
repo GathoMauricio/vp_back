@@ -1,10 +1,9 @@
 <div class="tab-pane fade" id="vale-gastos" role="tabpanel" aria-labelledby="vale-gastos-tab">
     <h5 class="text-center font-weight-bold p-1" style="background-color:#60b22f;color:white;">
         VALE DE GASTOS
-        <br>
-        @livewire('vale-component')
     </h5>
-    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#create_expense_modal">
+    @livewire('vale-component', ['ticket' => $ticket])
+    {{--  <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#create_expense_modal">
         Agregar vale
     </button>
     <br><br>
@@ -61,9 +60,9 @@
                 </tr>
             @endif
         </tbody>
-    </table>
+    </table>  --}}
 
 </div>
-@include('ticket.expense.show')
+{{--  @include('ticket.expense.show')
 @include('ticket.expense.create')
-@include('ticket.expense.edit')
+@include('ticket.expense.edit')  --}}

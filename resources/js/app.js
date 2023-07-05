@@ -654,3 +654,29 @@ window.deleteExpense = (id, ticket_id) => {
         function () {}
     );
 };
+window.deleteVale = (vale_id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            Livewire.emit("destroy", vale_id);
+        },
+        function () {}
+    );
+};
+
+//##############Livewire Functions###################
+Livewire.on("successNotification", (text) => {
+    alertify.success(text);
+});
+Livewire.on("errorNotification", (text) => {
+    alertify.error(text);
+});
+
+Livewire.on("dismissCreateVale", () => {
+    $("#dismissCreateVale").click();
+});
+
+Livewire.on("dismissEditVale", () => {
+    $("#dismissEditVale").click();
+});

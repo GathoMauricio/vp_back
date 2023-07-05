@@ -1,3 +1,3 @@
 <div>
-    {{ $texto }}
+    @include('vale_component.index')
 </div>

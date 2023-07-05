@@ -338,6 +338,7 @@
             reserved.
         </footer>
     </div>
+    @livewireScripts
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
@@ -367,7 +368,6 @@
             @yield('ready_scripts')
         });
     </script>
-    @livewireScripts
 </body>
 
 </html>
