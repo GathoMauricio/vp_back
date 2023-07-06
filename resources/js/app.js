@@ -659,7 +659,18 @@ window.deleteVale = (vale_id) => {
         "Atención",
         "¿Eliminar registro?",
         function () {
-            Livewire.emit("destroy", vale_id);
+            Livewire.emit("destroy", "vale", vale_id);
+        },
+        function () {}
+    );
+};
+
+window.deleteGasto = (gasto_id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            Livewire.emit("destroy", "gasto", gasto_id);
         },
         function () {}
     );
@@ -679,4 +690,12 @@ Livewire.on("dismissCreateVale", () => {
 
 Livewire.on("dismissEditVale", () => {
     $("#dismissEditVale").click();
+});
+
+Livewire.on("dismissCreateGasto", () => {
+    $("#dismissCreateGasto").click();
+});
+
+Livewire.on("dismissEditGasto", () => {
+    $("#dismissEditGasto").click();
 });

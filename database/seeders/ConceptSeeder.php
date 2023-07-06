@@ -22,6 +22,5 @@ class ConceptSeeder extends Seeder
         Concept::create(['concepto' => 'CB. BUS']);
         Concept::create(['concepto' => 'PRODUCTO']);
         Concept::create(['concepto' => 'ALIMENTO']);
-        Concept::create(['concepto' => 'OTRO']);
     }
 }

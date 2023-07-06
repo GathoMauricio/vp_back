@@ -1,11 +1,12 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="edit_vale" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="edit_gasto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
+    <br><br>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title font-weight-bold color-primary-sys" id="exampleModalLabel">
-                    Editar vale de gastos
+                    Editar gasto
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -17,9 +18,26 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="vp-label-form">Descripción</label>
-                                <input type="text" wire:model="descripcion" class="form-control">
-                                @error('descripcion')
+                                <label class="vp-label-form">Proveedor</label>
+                                <select wire:change="changeProvider" wire:model="proveedor" class="form-select">
+                                    <option value>Seleccione una opción</option>
+                                    @foreach ($proveedores as $key => $p)
+                                        <option value="{{ $p->proveedor }}">{{ $p->proveedor }}</option>
+                                    @endforeach
+                                    <option value="OTRO">Otro</option>
+                                </select>
+                                @error('proveedor')
+                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="display:{{ $displayOtroProveedor ? 'block' : 'none' }}">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="vp-label-form">Otro proveedor</label>
+                                <input type="text" wire:model="proveedor_otro" class="form-control">
+                                @error('proveedor_otro')
                                     <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -28,10 +46,26 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="vp-label-form">Cantidad recibida</label>
-                                <input type="number" step="0.1" wire:model="cantidad_recibida"
-                                    class="form-control">
-                                @error('cantidad_recibida')
+                                <label class="vp-label-form">Concepto</label>
+                                <select wire:change="changeConcept" wire:model="concepto" class="form-select">
+                                    <option value>Seleccione una opción</option>
+                                    @foreach ($conceptos as $key => $c)
+                                        <option value="{{ $c->concepto }}">{{ $c->concepto }}</option>
+                                    @endforeach
+                                    <option value="OTRO">Otro</option>
+                                </select>
+                                @error('concepto')
+                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"style="display:{{ $displayOtroConcepto ? 'block' : 'none' }}">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="vp-label-form">Otro concepto</label>
+                                <input type="text" wire:model="concepto_otro" class="form-control">
+                                @error('concepto_otro')
                                     <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -40,9 +74,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="vp-label-form">Responsable</label>
-                                <input type="text" wire:model="responsable" class="form-control">
-                                @error('responsable')
+                                <label class="vp-label-form">Costo</label>
+                                <input type="number" step='0.1' wire:model="costo" class="form-control">
+                                @error('costo')
                                     <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -51,32 +85,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="vp-label-form">Cantidad devuelta</label>
-                                <input type="number" step="0.1" wire:model="cantidad_regresada"
-                                    class="form-control">
-                                @error('cantidad_regresada')
-                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="vp-label-form">Autorizado por</label>
-                                <input type="text" wire:model="autorizado_por" class="form-control">
-                                @error('autorizado_por')
-                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="vp-label-form">Recibido por</label>
-                                <input type="text" wire:model="recibido_por" class="form-control">
-                                @error('recibido_por')
+                                <label class="vp-label-form">Detalle</label>
+                                <input type="text" wire:model="detalle" class="form-control">
+                                @error('detalle')
                                     <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -86,7 +97,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="dismissEditVale" type="button" class="btn btn-secondary"
+                <button id="dismissEditGasto" type="button" class="btn btn-secondary"
                     data-dismiss="modal">Cancelar</button>
                 <button type="button" wire:click="update" class="btn btn-primary">Actualizar</button>
             </div>

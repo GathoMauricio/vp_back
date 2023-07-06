@@ -17,34 +17,34 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <labelclass="vp-label-form">Descripción</label>
-                                    <input type="text" wire:model="descripcion" class="form-control">
-                                    @error('descripcion')
-                                        <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
-                                    @enderror
+                                <label class="vp-label-form">Descripción</label>
+                                <input type="text" wire:model="descripcion" class="form-control">
+                                @error('descripcion')
+                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <labelclass="vp-label-form">Cantidad recibida</label>
-                                    <input type="number" step="0.1" wire:model="cantidad_recibida"
-                                        class="form-control">
-                                    @error('cantidad_recibida')
-                                        <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
-                                    @enderror
+                                <label class="vp-label-form">Cantidad recibida</label>
+                                <input type="number" step="0.1" wire:model="cantidad_recibida"
+                                    class="form-control">
+                                @error('cantidad_recibida')
+                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <labelclass="vp-label-form">Responsable</label>
-                                    <input type="text" wire:model="responsable" class="form-control">
-                                    @error('responsable')
-                                        <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
-                                    @enderror
+                                <label class="vp-label-form">Responsable</label>
+                                <input type="text" wire:model="responsable" class="form-control">
+                                @error('responsable')
+                                    <span style="color:rgb(219, 9, 149)">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>

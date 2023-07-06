@@ -4,29 +4,38 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Vale;
+use App\Models\Gasto;
 
 class ValeComponent extends Component
 {
     //Listener para llamadas desde js a php
     protected $listeners = ['destroy' => 'destroy'];
     //El ticket llega como parámetro al crear el componente
-    public $ticket;
+    public $ticket = null;
+    //Se guarda el vale seleccionado para pasar como parámetro al mostrar detalles y gastos
+    public $vale = null;
     //Variables públicas que hacen bind con las propiedades del componente
     public
-        $vale_id,
-        $ticket_id,
-        $descripcion,
-        $cantidad_recibida,
-        $responsable,
-        $cantidad_regresada,
-        $gasto_total,
-        $autorizado_por,
-        $recibido_por;
+        $vale_id = null,
+        $ticket_id = null,
+        $descripcion = null,
+        $cantidad_recibida = null,
+        $responsable = null,
+        $cantidad_regresada = null,
+        $gasto_total = null,
+        $autorizado_por = null,
+        $recibido_por = null;
 
     public function render()
     {
         $vales = Vale::where('ticket_id', $this->ticket->id)->get();
         return view('livewire.vale-component', compact('vales'));
+    }
+
+    public function show(Vale $vale)
+    {
+        $this->vale = null;
+        $this->vale = $vale;
     }
 
     public function store()
@@ -107,18 +116,20 @@ class ValeComponent extends Component
         }
     }
 
-    public function destroy($vale_id)
+    public function destroy($tipo, $vale_id)
     {
-        $this->vale_id = $vale_id;
-        $vale = Vale::findOrFail($this->vale_id);
-        if ($vale->delete()) {
-            #TODO
-            //eliminar hijos
-            $this->clean();
-            $this->emit('successNotification', 'Registro eliminado.');
-            $this->emit('dismissEditVale');
-        } else {
-            $this->emit('errorNotification', 'Error al procesar la solicitud');
+        if ($tipo == 'vale') {
+            $this->vale_id = $vale_id;
+            $vale = Vale::findOrFail($this->vale_id);
+            $gastos = Gasto::where('vale_id', $this->vale_id);
+            if ($vale->delete()) {
+                $gastos->delete();
+                $this->clean();
+                $this->emit('successNotification', 'Registro eliminado.');
+                $this->emit('dismissEditVale');
+            } else {
+                $this->emit('errorNotification', 'Error al procesar la solicitud');
+            }
         }
     }
 

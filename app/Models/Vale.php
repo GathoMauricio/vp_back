@@ -33,4 +33,9 @@ class Vale extends Model
         )
             ->withDefault();
     }
+
+    public function gastos()
+    {
+        return $this->hasMany('App\Models\Gasto', 'vale_id');
+    }
 }

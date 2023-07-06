@@ -45,7 +45,6 @@ class CalculateClassCommand extends Command
             $inicio = Carbon::createFromFormat('Y-m-d H:i:s', $ticket->inicio);
             $ahora = Carbon::now();
             $minutos = $inicio->diffInMinutes($ahora);
-            \Log::debug($minutos);
             if ($minutos > 0 and $minutos <= 30) {
                 $ticket->clase_id = 1;
                 $ticket->precio = Clase::find(1)->precio;
