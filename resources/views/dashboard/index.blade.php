@@ -157,8 +157,8 @@
                                 <span class="icon icon-pencil"></span>
                             </a>
                         @endif
-                        <a href="javascript:void(0);" onclick="deleteTicket({{ $ticket->id }});"
-                            class="btn btn-danger"><span class="icon icon-bin"></span></a>
+                        {{--  <a href="javascript:void(0);" onclick="deleteTicket({{ $ticket->id }});"
+                            class="btn btn-danger"><span class="icon icon-bin"></span></a>  --}}
                     </td>
                 </tr>
             @endforeach

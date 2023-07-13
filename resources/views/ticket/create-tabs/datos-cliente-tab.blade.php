@@ -12,7 +12,10 @@
                     class="form-select select2">
                     <option value>Seleccione una opción</option>
                     @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->razon_social }}</option>
+                        <option value="{{ $client->id }}">{{ $client->razon_social }}
+                            ({{ count($client->users) }})
+                            𓁶
+                        </option>
                     @endforeach
                 </select>
                 @error('client_id')
