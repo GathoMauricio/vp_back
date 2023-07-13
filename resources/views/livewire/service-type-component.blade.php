@@ -18,8 +18,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="abrev" wire:model="abrev" class="vp-label-form">Avreviatura</label>
-                        <input type="text" name="abrev" id="abrev" class="form-control">
+                        <label for="abrev" class="vp-label-form">Abreviatura</label>
+                        <input type="text" wire:model="abrev" name="abrev" id="abrev" class="form-control">
                         @error('abrev')
                             <small style="color:red;">
                                 <strong>{{ $message }}</strong>
@@ -28,7 +28,8 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button type="buttos" style="height: 80%;" class="btn btn-primary btn-block">Agregar</button>
+                    <button wire:click="store" type="button" style="height: 80%;"
+                        class="btn btn-primary btn-block">Agregar</button>
                 </div>
             </div>
         </div>
@@ -45,11 +46,14 @@
                         &nbsp;
                     </th>
                 </tr>
-                <tr>
-                    <td width="45%">qwerty</td>
-                    <td width="45%">qwerty</td>
-                    <td width="10%"><button class="btn btn-danger"><span class="icon icon-bin"></span></button></td>
-                </tr>
+                @foreach ($tipos as $item)
+                    <tr>
+                        <td width="45%">{{ $item->tipo }}</td>
+                        <td width="45%">{{ $item->abrev }}</td>
+                        <td width="10%"><button onclick="deleteTipoServicio({{ $item->id }})"
+                                class="btn btn-danger"><span class="icon icon-bin"></span></button></td>
+                    </tr>
+                @endforeach
             </thead>
         </table>
     </div>

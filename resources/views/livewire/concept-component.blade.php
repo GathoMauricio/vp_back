@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button wire:click="store" type="buttos" style="height: 80%;"
+                    <button wire:click="store" type="button" style="height: 80%;"
                         class="btn btn-primary btn-block">Agregar</button>
                 </div>
             </div>
