@@ -17,7 +17,8 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button type="buttos" style="height: 80%;" class="btn btn-primary btn-block">Agregar</button>
+                    <button wire:click="store" type="buttos" style="height: 80%;"
+                        class="btn btn-primary btn-block">Agregar</button>
                 </div>
             </div>
         </div>
@@ -31,10 +32,13 @@
                         &nbsp;
                     </th>
                 </tr>
-                <tr>
-                    <td width="90%">qwerty</td>
-                    <td width="10%"><button class="btn btn-danger"><span class="icon icon-bin"></span></button></td>
-                </tr>
+                @foreach ($proveedores as $item)
+                    <tr>
+                        <td width="90%">{{ $item->proveedor }}</td>
+                        <td width="10%"><button onclick="deleteProveedor({{ $item->id }})"
+                                class="btn btn-danger"><span class="icon icon-bin"></span></button></td>
+                    </tr>
+                @endforeach
             </thead>
         </table>
     </div>
