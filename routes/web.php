@@ -50,4 +50,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('store/expense_voucher', [ExpenseVoucherController::class, 'store'])->name('store/expense_voucher');
     Route::put('update/expense_voucher', [ExpenseVoucherController::class, 'update'])->name('update/expense_voucher');
     Route::delete('delete/expense_voucher', [ExpenseVoucherController::class, 'delete'])->name('delete/expense_voucher');
+    //Concepts routes
+    Route::view('concepts', 'concepts/index')->name('concepts');
+    Route::view('providers', 'providers/index')->name('providers');
+    Route::view('service_types', 'service_types/index')->name('service_types');
 });

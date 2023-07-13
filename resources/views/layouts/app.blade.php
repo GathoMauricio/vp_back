@@ -315,6 +315,21 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
+                <a href="{{ route('concepts') }}">
+                    <i class="icon-database"></i> Conceptos de gastos
+                </a>
+            </div>
+            <div class="p-3">
+                <a href="{{ route('providers') }}">
+                    <i class="icon-database"></i> Proveedores
+                </a>
+            </div>
+            <div class="p-3">
+                <a href="{{ route('service_types') }}">
+                    <i class="icon-database"></i> Tipo de servicio
+                </a>
+            </div>
+            <div class="p-3">
                 <a href="#"
                     onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">

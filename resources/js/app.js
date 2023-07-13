@@ -676,6 +676,37 @@ window.deleteGasto = (gasto_id) => {
     );
 };
 
+window.deleteConcepto = (id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            Livewire.emit("destroy", id);
+        },
+        function () {}
+    );
+};
+window.deleteProveedor = (id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            Livewire.emit("destroy", id);
+        },
+        function () {}
+    );
+};
+window.deleteTipoServicio = (id) => {
+    alertify.confirm(
+        "Atención",
+        "¿Eliminar registro?",
+        function () {
+            Livewire.emit("destroy", id);
+        },
+        function () {}
+    );
+};
+
 //##############Livewire Functions###################
 Livewire.on("successNotification", (text) => {
     alertify.success(text);
