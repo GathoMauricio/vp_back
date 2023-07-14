@@ -40,7 +40,8 @@
                             <td>{{ $user->telefono }}</td>
                             <td>
                                 {{ $user->sepomex->cp }} {{ $user->sepomex->estado }} {{ $user->sepomex->municipio }}
-                                {{ $user->sepomex->ciudad }} {{ $user->sepomex->asentamiento }} {{ $user->num_ext }}
+                                {{ $user->sepomex->ciudad }} {{ $user->sepomex->asentamiento }} {{ $user->calle }}
+                                {{ $user->num_ext }}
                                 {{ $user->num_int }}
                             </td>
                             <td>

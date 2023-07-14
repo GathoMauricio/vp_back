@@ -48,6 +48,7 @@ class ClientUserController extends Controller
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
             'sepomex_id' => $request->sepomex_id,
+            'calle' => $request->calle,
             'num_ext' => $request->num_ext,
             'num_int' => $request->num_int,
             'cp' => $request->cp,
@@ -90,6 +91,7 @@ class ClientUserController extends Controller
         $user->area = $request->area;
         $user->direccion = $request->direccion;
         $user->sepomex_id = $request->sepomex_id;
+        $user->calle = $request->calle;
         $user->num_ext = $request->num_ext;
         $user->num_int = $request->num_int;
         $user->cp = $request->cp;

@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="asentamiento" class="vp-label-form">Colonia</label>
                             <select name="sepomex_id" id="asentamiento" class="form-select"></select>
@@ -139,7 +139,19 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="calle" class="vp-label-form">Calle</label>
+                            <input type="text" name="calle" value="{{ old('calle', $user->calle) }}"
+                                id="calle" class="form-control">
+                            @error('calle')
+                                <small style="color:red;">
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="num_ext" class="vp-label-form">Núm. Exterior</label>
                             <input type="text" name="num_ext" value="{{ old('num_ext', $user->num_ext) }}"
@@ -151,7 +163,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="num_int" class="vp-label-form">Núm. Interior</label>
                             <input type="text" name="num_int" value="{{ old('num_int', $user->num_int) }}"

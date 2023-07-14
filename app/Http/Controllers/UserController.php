@@ -11,7 +11,13 @@ class UserController extends Controller
     public function loadUserData(Request $request, $user_id)
     {
         $user = User::find($user_id);
-        return json_encode($user);
+        $data = [
+            'area' => $user->area,
+            'telefono' => $user->telefono,
+            'email' => $user->email,
+            'direccion' => $user->sepomex->cp . ' ' . $user->sepomex->municipio . ' ' . $user->sepomex->ciudad . ' ' . $user->sepomex->asentamiento . ' ' . $user->calle . ' ' . $user->num_ext . ' ' . $user->num_int,
+        ];
+        return json_encode($data);
     }
 
     public function index()
@@ -51,6 +57,7 @@ class UserController extends Controller
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
             'sepomex_id' => $request->sepomex_id,
+            'calle' => $request->calle,
             'num_ext' => $request->num_ext,
             'num_int' => $request->num_int,
             'cp' => $request->cp,
@@ -89,6 +96,7 @@ class UserController extends Controller
         $user->telefono = $request->telefono;
         $user->direccion = $request->direccion;
         $user->sepomex_id = $request->sepomex_id;
+        $user->calle = $request->calle;
         $user->num_ext = $request->num_ext;
         $user->num_int = $request->num_int;
         $user->cp = $request->cp;

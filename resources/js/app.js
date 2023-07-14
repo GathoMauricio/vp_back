@@ -102,6 +102,7 @@ window.loadUserData = (user_id) => {
     if (user_id.length > 0) {
         $.ajax("/api/load_user_data/" + user_id)
             .done(function (data) {
+                console.log(data);
                 const json = JSON.parse(data);
                 $("#area").val(json.area);
                 $("#telefono").val(json.telefono);
@@ -372,6 +373,7 @@ window.loadSepomex = (cp) => {
             },
         })
             .done(function (data) {
+                console.log(data);
                 let html = ``;
                 let counter = 0;
                 $.each(JSON.parse(data), function (index, item) {

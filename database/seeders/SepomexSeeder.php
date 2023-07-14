@@ -15,7 +15,7 @@ class SepomexSeeder extends Seeder
      */
     public function run()
     {
-        //ini_set('memory_limit', 0);
+        ini_set('memory_limit', 0);
         $data = DataMigrater::ExcelArray('sepomex.xlsx', 'app/db');
         $this->command->getOutput()->writeln("Extrayendo datos:");
         $this->command->getOutput()->progressStart(count($data));

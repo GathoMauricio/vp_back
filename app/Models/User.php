@@ -31,6 +31,7 @@ class User extends Authenticatable
         'num_int',
         'num_ext',
         'cp',
+        'calle'
     ];
 
     public function role()
