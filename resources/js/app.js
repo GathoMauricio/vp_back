@@ -60,6 +60,7 @@ window.loadUsersByClient = (client_id) => {
     if (client_id.length > 0) {
         $.ajax("/api/load_users_by_client/" + client_id)
             .done(function (data) {
+                console.log(data);
                 let html = "<option value>Seleccione una opción</option>";
                 let counter = 0;
                 $.each(JSON.parse(data), function (index, item) {
@@ -69,7 +70,9 @@ window.loadUsersByClient = (client_id) => {
                         item.id +
                         "'>" +
                         item.name +
-                        "</option>";
+                        " " +
+                        item.apellido;
+                    ("</option>");
                 });
                 $("#usuario_id").html(html);
                 if (counter > 0) {
