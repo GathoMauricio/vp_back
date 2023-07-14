@@ -7,6 +7,7 @@
             <h4>
                 Historico
             </h4>
+            @include('ticket.cards')
             <table style="width: 100%;">
                 <thead>
                     <tr style="background-color:#60b22f">

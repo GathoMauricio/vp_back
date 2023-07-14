@@ -7,6 +7,7 @@
             <h4>
                 Dashboard
             </h4>
+            @include('dashboard.cards')
             <table style="width: 100%;">
                 <thead>
                     <tr style="background-color:#60b22f">

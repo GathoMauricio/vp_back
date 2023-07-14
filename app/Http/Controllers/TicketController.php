@@ -21,7 +21,10 @@ class TicketController extends Controller
     {
         \Artisan::call('class:calculate');
         $tickets = Ticket::where('status_id', '>', 4)->where('folio', 'NOT LIKE', '%|%')->orderBy('created_at', 'DESC')->get();
-        return view('ticket.history', compact('tickets'));
+        $ticketsAll = Ticket::where('status_id', '>', 4)->get();
+        $terminadoNum = $ticketsAll->where('status_id', 5)->count();
+        $eliminadoNum = $ticketsAll->where('status_id', 6)->count();
+        return view('ticket.history', compact('tickets', 'terminadoNum', 'eliminadoNum'));
     }
     public function show($folio)
     {
