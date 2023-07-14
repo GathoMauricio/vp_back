@@ -17,6 +17,12 @@ use App\Models\User;
 
 class TicketController extends Controller
 {
+    public function history()
+    {
+        \Artisan::call('class:calculate');
+        $tickets = Ticket::where('status_id', '>', 4)->where('folio', 'NOT LIKE', '%|%')->orderBy('created_at', 'DESC')->get();
+        return view('ticket.history', compact('tickets'));
+    }
     public function show($folio)
     {
         $ticket = Ticket::where('folio', $folio)->first();

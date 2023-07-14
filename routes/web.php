@@ -15,6 +15,7 @@ Route::view('/', 'auth.login')->name('/')->middleware('guest');
 Route::middleware(['auth'])->group(function () {
     //Ticket routes
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('history', [TicketController::class, 'history'])->name('history');
     Route::get('create/ticket', [TicketController::class, 'create'])->name('create/ticket');
     Route::post('store/ticket', [TicketController::class, 'store'])->name('store/ticket');
     Route::get('show/ticket/{folio}', [TicketController::class, 'show'])->name('show/ticket');
@@ -50,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('store/expense_voucher', [ExpenseVoucherController::class, 'store'])->name('store/expense_voucher');
     Route::put('update/expense_voucher', [ExpenseVoucherController::class, 'update'])->name('update/expense_voucher');
     Route::delete('delete/expense_voucher', [ExpenseVoucherController::class, 'delete'])->name('delete/expense_voucher');
-    //Concepts routes
+    //admin
     Route::view('concepts', 'concepts/index')->name('concepts');
     Route::view('providers', 'providers/index')->name('providers');
     Route::view('service_types', 'service_types/index')->name('service_types');

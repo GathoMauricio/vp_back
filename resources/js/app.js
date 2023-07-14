@@ -670,6 +670,16 @@ window.deleteVale = (vale_id) => {
     );
 };
 
+window.verMasMenos = (id) => {
+    if ($("#ver_mas_" + id).text() == "Ver más") {
+        $("#ver_mas_" + id).text("Ver menos");
+        $("#subticket_" + id).css("display", "");
+    } else {
+        $("#ver_mas_" + id).text("Ver más");
+        $("#subticket_" + id).css("display", "none");
+    }
+};
+
 window.deleteGasto = (gasto_id) => {
     alertify.confirm(
         "Atención",

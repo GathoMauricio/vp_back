@@ -315,6 +315,11 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
+                <a href="{{ route('history') }}">
+                    <i class="icon-database"></i> Historico
+                </a>
+            </div>
+            <div class="p-3">
                 <a href="{{ route('concepts') }}">
                     <i class="icon-database"></i> Conceptos de gastos
                 </a>

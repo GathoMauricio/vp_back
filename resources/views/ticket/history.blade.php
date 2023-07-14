@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <h4>
-                Dashboard
+                Historico
             </h4>
             <table style="width: 100%;">
                 <thead>
@@ -162,18 +162,12 @@
                                     data-toggle="tooltip" title="Ver órden de servicio...">
                                     <span class="icon icon-eye"></span>
                                 </a>
-                                @if ($ticket->status->id != 6)
-                                    <a href="{{ route('edit/ticket', $ticket->folio) }}" class="btn btn-warning"
-                                        data-toggle="tooltip" title="Editar registro...">
-                                        <span class="icon icon-pencil"></span>
-                                    </a>
-                                @endif
                                 {{--  <a href="javascript:void(0);" onclick="deleteTicket({{ $ticket->id }});"
                             class="btn btn-danger"><span class="icon icon-bin"></span></a>  --}}
                             </td>
                         </tr>
                         @php
-                            $subtickets = App\Models\Ticket::where('status_id', '<=', 4)
+                            $subtickets = App\Models\Ticket::where('status_id', '>', 4)
                                 ->where('folio', 'LIKE', '%' . $ticket->folio . '|%')
                                 ->orderBy('created_at', 'DESC')
                                 ->get();
@@ -305,12 +299,6 @@
                                         data-toggle="tooltip" title="Ver órden de servicio...">
                                         <span class="icon icon-eye"></span>
                                     </a>
-                                    @if ($subticket->status->id != 6)
-                                        <a href="{{ route('edit/ticket', $subticket->folio) }}" class="btn btn-warning"
-                                            data-toggle="tooltip" title="Editar registro...">
-                                            <span class="icon icon-pencil"></span>
-                                        </a>
-                                    @endif
                                     {{--  <a href="javascript:void(0);" onclick="deleteTicket({{ $subticket->id }});"
                             class="btn btn-danger"><span class="icon icon-bin"></span></a>  --}}
                                 </td>
