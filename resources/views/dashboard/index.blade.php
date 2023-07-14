@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.vp_header')
-    <table class="table" id="dashboard_table">
+    <table style="width: 100%;">
         <thead>
             <tr style="background-color:#60b22f">
                 <th style="color:white;">
@@ -161,6 +161,144 @@
                             class="btn btn-danger"><span class="icon icon-bin"></span></a>  --}}
                     </td>
                 </tr>
+                @php
+                    $subtickets = App\Models\Ticket::where('folio', 'LIKE', '%' . $ticket->folio . '|%')->get();
+                @endphp
+                @if (count($subtickets) > 0)
+                    <tr>
+                        <td colspan="9" class="text-center">
+                            <a onclick="$('#subticket_{{ $ticket->id }}').css('display','');"
+                                href="javascript:void(0)">Ver más de {{ $ticket->folio }}</a>
+                        </td>
+                    </tr>
+                @endif
+                @foreach ($subtickets as $key => $subticket)
+                    <tr id="subticket_{{ $ticket->id }}" style="display:none;">
+                        <td class="font-weight-bold">
+                            {{ $subticket->folio }}
+                        </td>
+                        <td class="font-weight-bold">
+                            @foreach ($subticket->tipos_servicios as $tipos)
+                                {{ '|' . $tipos->tipo . '|' }}
+                            @endforeach
+                        </td>
+                        <td class="font-weight-bold">
+                            {{ $subticket->usuario->cliente->razon_social }}
+                        </td>
+                        <td class="font-weight-bold">
+                            {{ explode(' ', $subticket->created_at)[0] }}
+                        </td>
+                        <td class="font-weight-bold">
+                            {{ $subticket->usuario->name }}
+                        </td>
+                        <td class="font-weight-bold text-center">
+                            @switch($subticket->status_id)
+                                @case(1)
+                                    <span style="background-color:gray;color:white;" data-toggle="tooltip"
+                                        title="{{ $subticket->status->descripcion }}"
+                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                        {{ $subticket->status->nombre }}
+                                    </span>
+                                    <br>
+                                    <small><b>{{ dateToString($subticket->created_at) }}</b></small>
+                                @break
+
+                                @case(2)
+                                    <span style="background-color:rgb(74, 126, 204);color:rgb(251, 250, 253);" data-toggle="tooltip"
+                                        title="{{ $subticket->status->descripcion }}"
+                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                        {{ $subticket->status->nombre }}
+                                    </span>
+                                    <br>
+                                    <small><b>{!! dateToString($subticket->aprobado_time) !!}</b></small>
+                                @break
+
+                                @case(3)
+                                    <span style="background-color:rgb(212, 243, 102);color:rgb(60, 49, 83);" data-toggle="tooltip"
+                                        title="{{ $subticket->status->descripcion }}"
+                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                        {{ $subticket->status->nombre }}
+                                    </span>
+                                    <br>
+                                    <small><b>{!! dateToString($subticket->inicio) !!}</b></small>
+                                @break
+
+                                @case(4)
+                                    <span style="background-color:rgb(235, 175, 65);color:rgb(245, 244, 247);" data-toggle="tooltip"
+                                        title="{{ $subticket->status->descripcion }}"
+                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                        {{ $subticket->status->nombre }}
+                                    </span>
+                                    <br>
+                                    <small><b>{!! dateToString($subticket->cierre) !!}</b></small>
+                                @break
+
+                                @case(5)
+                                    <span style="background-color:rgb(60, 230, 18);color:rgb(249, 246, 255);" data-toggle="tooltip"
+                                        title="{{ $subticket->status->descripcion }}"
+                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                        {{ $subticket->status->nombre }}
+                                    </span>
+                                    <br>
+                                    <small><b>{!! dateToString($subticket->finalizado_time) !!}</b></small>
+                                @break
+
+                                @case(6)
+                                    <span style="background-color:rgb(255, 74, 19);color:rgb(249, 248, 253);" data-toggle="tooltip"
+                                        title="{{ $subticket->status->descripcion }}"
+                                        class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                                        {{ $subticket->status->nombre }}
+                                    </span>
+                                @break
+                            @endswitch
+
+                        </td>
+                        <td class="font-weight-bold">
+                            @switch($subticket->status->id)
+                                @case(1)
+                                    <span class="float-left"><b>N|A</b></span>
+                                @break
+
+                                @case(2)
+                                    <span class="float-left"><b>N|A</b></span>
+                                @break
+
+                                @case(3)
+                                    <span class="float-left"><b>{{ $subticket->clase->tipo }}</b></span>
+                                @break
+
+                                @case(4)
+                                    <span class="float-left"><b>{{ $subticket->clase->tipo }}</b></span>
+                                @break
+
+                                @case(5)
+                                    <span class="float-left"><b>{{ $subticket->clase->tipo }}</b></span>
+                                @break
+
+                                @case(6)
+                                    <span class="float-left"><b>N|A</b></span>
+                                @break
+                            @endswitch
+                        </td>
+                        <td class="font-weight-bold">
+                            {{ $subticket->pagado }}
+                        </td>
+                        <td class="font-weight-bold">
+                            <a href="{{ route('show/ticket', $subticket->folio) }}" class="btn btn-primary"
+                                data-toggle="tooltip" title="Ver órden de servicio...">
+                                <span class="icon icon-eye"></span>
+                            </a>
+                            @if ($subticket->status->id != 6)
+                                <a href="{{ route('edit/ticket', $subticket->folio) }}" class="btn btn-warning"
+                                    data-toggle="tooltip" title="Editar registro...">
+                                    <span class="icon icon-pencil"></span>
+                                </a>
+                            @endif
+                            {{--  <a href="javascript:void(0);" onclick="deleteTicket({{ $subticket->id }});"
+                            class="btn btn-danger"><span class="icon icon-bin"></span></a>  --}}
+                        </td>
+                    </tr>
+                @endforeach
             @endforeach
             @if (count($tickets) <= 0)
                 <tr>
